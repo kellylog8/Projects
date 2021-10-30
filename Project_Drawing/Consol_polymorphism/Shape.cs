@@ -6,19 +6,11 @@ using System.Threading.Tasks;
 
 namespace Consol_polymorphism
 {
-    class Shape
+    interface IShape
     {
-        public virtual double CalcLength()
-        {
-            Console.WriteLine("[Shape] : length");
-            return 0.0;
-        }
+        double CalcLength();
 
-        public virtual double CalcArea()
-        {
-            Console.WriteLine("[Shape] : area");
-            return 0.0;
-        }
+        double CalcArea();
 
     }
 }

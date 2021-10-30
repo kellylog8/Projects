@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Consol_polymorphism
 {
-    class Rectangle : Shape
+    class Rectangle : IShape
     {
-        public override double CalcLength()
+        public double CalcLength()
         {
             Console.WriteLine("[Rectangle] : length");
             return 0.0;
         }
 
-        public override double CalcArea()
+        public double CalcArea()
         {
             Console.WriteLine("[Rectangle] : area");
             return 0.0;
