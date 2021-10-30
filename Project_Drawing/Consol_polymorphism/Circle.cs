@@ -6,25 +6,24 @@ using System.Threading.Tasks;
 
 namespace Consol_polymorphism
 {
-    class Rectangle : IShape
+    class Circle : IShape
     {
-        private double m_width;
-        private double m_height;
+        private double m_radius;
 
-        public Rectangle(double width, double height)
+        public Circle(double radius)
         {
-            m_width = width;
-            m_height = height;
+            m_radius = radius;
         }
 
         public double CalcLength()
         {
-            return ((m_width + m_height) * 2);
+            return (2.0 * Math.PI * m_radius);
         }
 
         public double CalcArea()
         {
-            return (m_width * m_height);
+            return (Math.PI * m_radius * m_radius);
+            //return (Math.PI * Math.Pow(m_radius, 2));
         }
 
     }

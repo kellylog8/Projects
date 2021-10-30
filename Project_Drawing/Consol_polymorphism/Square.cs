@@ -10,14 +10,20 @@ namespace Consol_polymorphism
     {
         private double m_width;
 
-        public double CalcArea()
+        public Square(double width)
         {
-            return (m_width * m_width);
+            m_width = width;
         }
 
         public double CalcLength()
         {
             return (m_width * 4.0);
         }
+
+        public double CalcArea()
+        {
+            return (m_width * m_width);
+        }
+
     }
 }
