@@ -15,7 +15,6 @@ namespace Drawing
         enum MODE { DEFAULT, RECTANGLE, SQUARE, TRIANGLE, CIRCLE };
         MODE m_mode = MODE.DEFAULT;
 
-
         bool m_isClicked = false;
 
         Point m_start;
