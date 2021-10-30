@@ -22,9 +22,7 @@ namespace Consol_polymorphism
 
         public double CalcArea()
         {
-            double h = m_length * Math.Sin(m_length);
-
-            return (m_length * h / 2.0);
+            return (Math.Sqrt(3.0) / 4.0 *Math.Pow(m_length,2));
         }
 
     }
