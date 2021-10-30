@@ -10,6 +10,10 @@ namespace Consol_polymorphism
     {
         static void Main(string[] args)
         {
+            Rectangle rect = new Rectangle();
+            rect.CalcLength();
+            rect.CalcArea();
+
         }
     }
 }
