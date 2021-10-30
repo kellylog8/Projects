@@ -85,6 +85,7 @@ namespace Drawing
 
 
 
+
         private void Form1_Resize(object sender, EventArgs e)
         {
             Control control = (Control)sender;
