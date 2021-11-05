@@ -8,12 +8,8 @@ using System.Drawing;
 
 namespace Drawing
 {
-    class MyRectangle
+    class MyRectangle : IShape
     {
-        public MyRectangle()
-        {
-        }
-
         public Rectangle GetRect(Point start, Point end)
         {
             Rectangle rect;

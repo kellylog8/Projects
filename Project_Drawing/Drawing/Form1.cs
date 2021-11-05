@@ -22,6 +22,10 @@ namespace Drawing
 
         Graphics m_graphics;
 
+        List<MyRectangle> m_rectangle = new List<MyRectangle>();
+        List<Square> m_square = new List<Square>();
+        List<Circle> m_circle = new List<Circle>();
+
         public Form1()
         {
             InitializeComponent();
@@ -67,15 +71,30 @@ namespace Drawing
             switch (m_mode)
             {
                 case MODE.RECTANGLE:
-                    MyRectangle rectangle = new MyRectangle();
-                    Rectangle rect = rectangle.GetRect(m_start, m_end);
-                    m_graphics.DrawRectangle(Pens.Black, rect);
-                    break;
+                    {
+                        MyRectangle rectangle = new MyRectangle();
+                        m_rectangle.Add(rectangle);
+                        Rectangle rect = rectangle.GetRect(m_start, m_end);
+                        m_graphics.DrawRectangle(Pens.Black, rect);
+                        break;
+                    }
                 case MODE.SQUARE:
-                    break;
+                    {
+                        Square square = new Square();
+                        m_square.Add(square);
+                        Rectangle rect = square.GetRect(m_start, m_end);
+                        m_graphics.DrawRectangle(Pens.Black, rect);
+                        break;
+                    }
                 case MODE.TRIANGLE:
                     break;
                 case MODE.CIRCLE:
+                    {
+                        Circle circle = new Circle();
+                        m_circle.Add(circle);
+                        Rectangle rect = circle.GetRect(m_start, m_end);
+                        m_graphics.DrawPolygon(Pens.Black, );
+                    }
                     break;
             }
             
