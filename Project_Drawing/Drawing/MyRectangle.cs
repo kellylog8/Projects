@@ -10,12 +10,18 @@ namespace Drawing
 {
     class MyRectangle : IShape
     {
-        public Rectangle GetRect(Point start, Point end)
-        {
-            Rectangle rect;
-            CalcRect(start, end, out rect);
+        Rectangle m_rect;
 
-            return rect;
+        public Pen Pen { get; set; }
+
+        public void CalcRect(Point start, Point end)
+        {
+            CalcRect(start, end, out m_rect);
+        }
+
+        public void Draw(Graphics canvas)
+        {
+            canvas.DrawRectangle(Pen, m_rect);
         }
 
         void CalcRect(Point startPos, Point endPos, out Rectangle rect)

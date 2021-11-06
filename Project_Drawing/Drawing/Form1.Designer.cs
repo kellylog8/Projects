@@ -35,7 +35,16 @@ namespace Drawing
             this.btn_square = new System.Windows.Forms.Button();
             this.btn_triangle = new System.Windows.Forms.Button();
             this.btn_circle = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn_solidPen = new System.Windows.Forms.Button();
+            this.btn_dotPen = new System.Windows.Forms.Button();
+            this.btn_dashdotPen = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox_penSize = new System.Windows.Forms.TextBox();
+            this.btn_brushColor = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel_shape.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_shape
@@ -104,20 +113,92 @@ namespace Drawing
             this.btn_circle.UseVisualStyleBackColor = true;
             this.btn_circle.Click += new System.EventHandler(this.btn_circle_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Silver;
+            this.flowLayoutPanel1.Controls.Add(this.btn_solidPen);
+            this.flowLayoutPanel1.Controls.Add(this.btn_dotPen);
+            this.flowLayoutPanel1.Controls.Add(this.btn_dashdotPen);
+            this.flowLayoutPanel1.Controls.Add(this.button3);
+            this.flowLayoutPanel1.Controls.Add(this.textBox_penSize);
+            this.flowLayoutPanel1.Controls.Add(this.btn_brushColor);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(732, 12);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(56, 426);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // btn_solidPen
+            // 
+            this.btn_solidPen.Location = new System.Drawing.Point(3, 3);
+            this.btn_solidPen.Name = "btn_solidPen";
+            this.btn_solidPen.Size = new System.Drawing.Size(50, 50);
+            this.btn_solidPen.TabIndex = 0;
+            this.btn_solidPen.UseVisualStyleBackColor = true;
+            this.btn_solidPen.Click += new System.EventHandler(this.btn_solidPen_Click);
+            // 
+            // btn_dotPen
+            // 
+            this.btn_dotPen.Location = new System.Drawing.Point(3, 59);
+            this.btn_dotPen.Name = "btn_dotPen";
+            this.btn_dotPen.Size = new System.Drawing.Size(50, 50);
+            this.btn_dotPen.TabIndex = 0;
+            this.btn_dotPen.UseVisualStyleBackColor = true;
+            this.btn_dotPen.Click += new System.EventHandler(this.btn_dotPen_Click);
+            // 
+            // btn_dashdotPen
+            // 
+            this.btn_dashdotPen.Location = new System.Drawing.Point(3, 115);
+            this.btn_dashdotPen.Name = "btn_dashdotPen";
+            this.btn_dashdotPen.Size = new System.Drawing.Size(50, 50);
+            this.btn_dashdotPen.TabIndex = 0;
+            this.btn_dashdotPen.UseVisualStyleBackColor = true;
+            this.btn_dashdotPen.Click += new System.EventHandler(this.btn_dashdotPen_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(3, 171);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(50, 50);
+            this.button3.TabIndex = 0;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox_penSize
+            // 
+            this.textBox_penSize.Location = new System.Drawing.Point(3, 227);
+            this.textBox_penSize.Name = "textBox_penSize";
+            this.textBox_penSize.Size = new System.Drawing.Size(50, 21);
+            this.textBox_penSize.TabIndex = 1;
+            this.textBox_penSize.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_penSize_KeyDown);
+            // 
+            // btn_brushColor
+            // 
+            this.btn_brushColor.BackColor = System.Drawing.Color.Black;
+            this.btn_brushColor.Location = new System.Drawing.Point(3, 254);
+            this.btn_brushColor.Name = "btn_brushColor";
+            this.btn_brushColor.Size = new System.Drawing.Size(50, 50);
+            this.btn_brushColor.TabIndex = 0;
+            this.btn_brushColor.UseVisualStyleBackColor = false;
+            this.btn_brushColor.Click += new System.EventHandler(this.btn_brushColor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel_shape);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Painter";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panel_shape.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -130,6 +211,14 @@ namespace Drawing
         private System.Windows.Forms.Button btn_square;
         private System.Windows.Forms.Button btn_triangle;
         private System.Windows.Forms.Button btn_circle;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btn_solidPen;
+        private System.Windows.Forms.Button btn_dotPen;
+        private System.Windows.Forms.Button btn_dashdotPen;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox_penSize;
+        private System.Windows.Forms.Button btn_brushColor;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 

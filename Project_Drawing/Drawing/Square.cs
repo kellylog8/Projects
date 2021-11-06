@@ -9,7 +9,16 @@ namespace Drawing
 {
     class Square : IShape
     {
-        public Rectangle GetRect(Point start, Point end)
+        Rectangle m_rect;
+
+        public Pen Pen { get; set; }
+
+        public void Draw(Graphics canvas)
+        {
+            canvas.DrawRectangle(Pen, m_rect);
+        }
+
+        public void CalcRect(Point start, Point end)
         {
             Point p1, p2;
             CalcRect(start, end, out p1, out p2);
@@ -29,14 +38,11 @@ namespace Drawing
                 length = height;
             }
 
-            Rectangle square = new Rectangle(p1.X, p1.Y, length, length);
+            m_rect = new Rectangle(p1.X, p1.Y, length, length);
 
             //Rectangle square = new Rectangle();
             //square.Location = p1;
             //square.Size = new Size(Math.Abs(p2.X - p1.X), Math.Abs(p2.Y - p1.Y));
-
-
-            return square;
         }
 
         void CalcRect(Point startPos, Point endPos, out Point p1, out Point p2)

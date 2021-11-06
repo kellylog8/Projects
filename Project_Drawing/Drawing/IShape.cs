@@ -9,6 +9,8 @@ namespace Drawing
 {
     interface IShape
     {
-        Rectangle GetRect(Point start, Point end);
+        void CalcRect(Point start, Point end);
+
+        void Draw(Graphics canvas);
     }
 }

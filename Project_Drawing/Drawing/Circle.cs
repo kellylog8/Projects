@@ -9,29 +9,81 @@ namespace Drawing
 {
     class Circle : IShape
     {
-        public Rectangle GetRect(Point start, Point end)
+        Rectangle m_rect;
+
+        public Pen Pen { get; set; }
+
+        public void CalcRect(Point start, Point end)
         {
-            Rectangle circle = new Rectangle();
+            //double radian = Math.PI / 180.0;
+            //
+            //int centerX = (end.X + start.X) / 2;
+            //int centerY = (end.Y + start.Y) / 2;
+            //double r = Math.Abs(end.X - start.X) / 2.0;
 
-            double radian = Math.PI / 180.0;
-
-            int centerX = (end.X + start.X) / 2;
-            int centerY = (end.Y + start.Y) / 2;
-            double r = Math.Abs(end.X - start.X) / 2.0;
+            Point p1, p2;
+            CalcRect(start, end, out p1, out p2);
 
 
+            int width = Math.Abs(p2.X - p1.X);
+            int height = Math.Abs(p2.Y - p1.Y);
 
-            return circle;
+            int length = width;
+
+            if (width < height)
+            {
+                length = width;
+            }
+            else if (width > height)
+            {
+                length = height;
+            }
+
+            m_rect = new Rectangle(p1.X, p1.Y, length, length);
         }
 
-        void CalcCircle(Point center, double radius, double angle, out Point point)
+        public void Draw(Graphics canvas)
         {
-            double radian = Math.PI / 180.0 * angle;
+            canvas.DrawArc(Pen, m_rect, 0.0f, 360.0f);
+        }
 
-            int x = center.X + (int)(radius * Math.Cos(radian));
-            int y = center.Y - (int)(radius * Math.Sin(radian));
+        void CalcRect(Point startPos, Point endPos, out Point p1, out Point p2)
+        {
+            p1 = new Point();
+            p2 = new Point();
 
-            point = new Point(x, y);
+            int movementX = endPos.X - startPos.X;
+            int movementY = endPos.Y - startPos.Y;
+
+            if (movementX > 0 && movementY > 0)
+            {
+                p1.X = startPos.X;
+                p1.Y = startPos.Y;
+                p2.X = endPos.X;
+                p2.Y = endPos.Y;
+            }
+            else if (movementX < 0 && movementY > 0)
+            {
+                p1.X = endPos.X;
+                p1.Y = startPos.Y;
+                p2.X = startPos.X;
+                p2.Y = endPos.Y;
+            }
+            else if (movementX > 0 && movementY < 0)
+            {
+                p1.X = startPos.X;
+                p1.Y = endPos.Y;
+                p2.X = endPos.X;
+                p2.Y = startPos.Y;
+            }
+            else if (movementX < 0 && movementY < 0)
+            {
+                p1.X = endPos.X;
+                p1.Y = endPos.Y;
+                p2.X = startPos.X;
+                p2.Y = startPos.Y;
+            }
+
         }
 
     }
