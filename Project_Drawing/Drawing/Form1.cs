@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;
+
 namespace Drawing
 {
     public partial class Form1 : Form
@@ -22,22 +24,14 @@ namespace Drawing
 
         Graphics m_graphics;
 
-        //List<MyRectangle> m_rectangle = new List<MyRectangle>();
-        //List<Square> m_square = new List<Square>();
-        //List<Circle> m_circle = new List<Circle>();
-
         List<IShape> m_list = new List<IShape>();
         int m_count = 0;
 
         Pen m_pen;
 
-        Pen m_solidPen;
-        Pen m_dotPen;
-        Pen m_dashdotPen;
-
         Color m_color;
-
         float m_penSize;
+        DashStyle m_dashStyle;
 
         public Form1()
         {
@@ -50,16 +44,10 @@ namespace Drawing
 
             m_penSize = 1.0f;
             m_color = Color.Black;
+            m_dashStyle = DashStyle.Solid;
 
-            m_solidPen = new Pen(m_color, m_penSize);
-
-            m_dotPen = new Pen(m_color, m_penSize);
-            m_dotPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-
-            m_dashdotPen = new Pen(m_color, m_penSize);
-            m_dashdotPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
-
-            m_pen = m_solidPen;
+            m_pen = new Pen(m_color, m_penSize);
+            m_pen.DashStyle = m_dashStyle;
         }
 
 
@@ -101,7 +89,7 @@ namespace Drawing
                         MyRectangle rectangle = new MyRectangle();
                         rectangle.CalcRect(m_start, m_end);
 
-                        rectangle.Pen = m_pen;
+                        rectangle.SetPenStyle(m_penSize, m_color, m_dashStyle);
                         rectangle.Draw(m_graphics);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
@@ -114,7 +102,7 @@ namespace Drawing
                         Square square = new Square();
                         square.CalcRect(m_start, m_end);
 
-                        square.Pen = m_pen;
+                        square.SetPenStyle(m_penSize, m_color, m_dashStyle);
                         square.Draw(m_graphics);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
@@ -129,7 +117,7 @@ namespace Drawing
                         Circle circle = new Circle();
                         circle.CalcRect(m_start, m_end);
 
-                        circle.Pen = m_pen;
+                        circle.SetPenStyle(m_penSize, m_color, m_dashStyle);
                         circle.Draw(m_graphics);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
@@ -202,36 +190,25 @@ namespace Drawing
             }
             else if (e.KeyCode == Keys.T)
             {
-                //foreach (IShape shape in m_list)
-                //{
-                //    shape.Draw(m_graphics, Pens.Red);
-                //}
-
                 ReDraw(false);
             }
             else if (e.Control && e.Shift && e.KeyCode == Keys.Z)
             {
-                Console.WriteLine("Ctrl + Shift + Z key");
-                Console.WriteLine("Redo");
+                Console.WriteLine("Redo : Ctrl + Shift + Z key");
 
                 m_count++;
-                Console.WriteLine("index -> " + m_count);
                 if (m_count > m_list.Count)
                     m_count = m_list.Count;
-                Console.WriteLine("index -> " + m_count);
 
                 ReDraw();
             }
             else if (e.Control && e.KeyCode == Keys.Z)
             {
-                Console.WriteLine("Ctrl + Z key");
-                Console.WriteLine("Undo");
+                Console.WriteLine("Undo : Ctrl + Z key");
 
                 m_count--;
-                Console.WriteLine("index -> " + m_count);
                 if (m_count < 0)
                     m_count = 0;
-                Console.WriteLine("index -> " + m_count);
 
                 ReDraw();
             }
@@ -242,23 +219,29 @@ namespace Drawing
 
         private void btn_solidPen_Click(object sender, EventArgs e)
         {
-            m_pen.Color = m_color;
-            m_pen.Width = m_penSize;
-            m_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            m_dashStyle = DashStyle.Solid;
+
+            //m_pen.Color = m_color;
+            //m_pen.Width = m_penSize;
+            //m_pen.DashStyle = m_dashStyle;
         }
 
         private void btn_dotPen_Click(object sender, EventArgs e)
         {
-            m_pen.Color = m_color;
-            m_pen.Width = m_penSize;
-            m_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            m_dashStyle = DashStyle.Dot;
+
+            //m_pen.Color = m_color;
+            //m_pen.Width = m_penSize;
+            //m_pen.DashStyle = m_dashStyle;
         }
 
         private void btn_dashdotPen_Click(object sender, EventArgs e)
         {
-            m_pen.Color = m_color;
-            m_pen.Width = m_penSize;
-            m_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+            m_dashStyle = DashStyle.DashDot;
+
+            //m_pen.Color = m_color;
+            //m_pen.Width = m_penSize;
+            //m_pen.DashStyle = m_dashStyle;
         }
 
         private void textBox_penSize_KeyDown(object sender, KeyEventArgs e)

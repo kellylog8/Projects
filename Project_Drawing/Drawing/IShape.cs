@@ -5,10 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Drawing.Drawing2D;
+
 namespace Drawing
 {
+    struct PenStyle
+    {
+        public float size;
+        public Color color;
+        public DashStyle dash;
+    }
+
     interface IShape
     {
+        void SetPenStyle(float size, Color color, DashStyle dash);
+
         void CalcRect(Point start, Point end);
 
         void Draw(Graphics canvas);

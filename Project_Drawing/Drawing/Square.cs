@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,13 @@ namespace Drawing
     {
         Rectangle m_rect;
 
-        public Pen Pen { get; set; }
+        PenStyle m_penStyle;
 
         public void Draw(Graphics canvas)
         {
-            canvas.DrawRectangle(Pen, m_rect);
+            Pen pen = new Pen(m_penStyle.color, m_penStyle.size);
+            pen.DashStyle = m_penStyle.dash;
+            canvas.DrawRectangle(pen, m_rect);
         }
 
         public void CalcRect(Point start, Point end)
@@ -40,9 +43,6 @@ namespace Drawing
 
             m_rect = new Rectangle(p1.X, p1.Y, length, length);
 
-            //Rectangle square = new Rectangle();
-            //square.Location = p1;
-            //square.Size = new Size(Math.Abs(p2.X - p1.X), Math.Abs(p2.Y - p1.Y));
         }
 
         void CalcRect(Point startPos, Point endPos, out Point p1, out Point p2)
@@ -84,5 +84,11 @@ namespace Drawing
 
         }
 
+        public void SetPenStyle(float size, Color color, DashStyle dash)
+        {
+            m_penStyle.size = size;
+            m_penStyle.color = color;
+            m_penStyle.dash = dash;
+        }
     }
 }

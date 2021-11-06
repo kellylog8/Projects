@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Drawing
 {
@@ -12,7 +13,7 @@ namespace Drawing
     {
         Rectangle m_rect;
 
-        public Pen Pen { get; set; }
+        PenStyle m_penStyle;
 
         public void CalcRect(Point start, Point end)
         {
@@ -21,7 +22,16 @@ namespace Drawing
 
         public void Draw(Graphics canvas)
         {
-            canvas.DrawRectangle(Pen, m_rect);
+            Pen pen = new Pen(m_penStyle.color, m_penStyle.size);
+            pen.DashStyle = m_penStyle.dash;
+            canvas.DrawRectangle(pen, m_rect);
+        }
+
+        public void SetPenStyle(float size, Color color, DashStyle dash)
+        {
+            m_penStyle.size = size;
+            m_penStyle.color = color;
+            m_penStyle.dash = dash;
         }
 
         void CalcRect(Point startPos, Point endPos, out Rectangle rect)
