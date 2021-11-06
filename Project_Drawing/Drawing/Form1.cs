@@ -139,6 +139,14 @@ namespace Drawing
             Control control = (Control)sender;
 
             panel_shape.SetBounds(10, 10, 55, control.ClientSize.Height-20);
+
+            if (m_graphics != null)
+            {
+                m_graphics.Dispose();
+                m_graphics = CreateGraphics();
+                ReDraw();
+            }
+            
         }
 
 
