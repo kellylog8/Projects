@@ -48,6 +48,8 @@ namespace Drawing
 
             m_pen = new Pen(m_color, m_penSize);
             m_pen.DashStyle = m_dashStyle;
+
+            DoubleBuffered = true;
         }
 
 
@@ -69,10 +71,6 @@ namespace Drawing
 
             m_end = e.Location;
 
-            if (m_isClicked)
-            {
-
-            }
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -111,7 +109,18 @@ namespace Drawing
                         break;
                     }
                 case MODE.TRIANGLE:
-                    break;
+                    {
+                        Triangle triangle = new Triangle();
+                        triangle.CalcRect(m_start, m_end);
+
+                        triangle.SetPenStyle(m_penSize, m_color, m_dashStyle);
+                        triangle.Draw(m_graphics, m_pen);
+
+                        m_list.RemoveRange(m_count, m_list.Count - m_count);
+                        m_list.Add(triangle);
+                        m_count++;
+                        break;
+                    }
                 case MODE.CIRCLE:
                     {
                         Circle circle = new Circle();

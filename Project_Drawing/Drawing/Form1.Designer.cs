@@ -34,7 +34,6 @@ namespace Drawing
             this.panel_style = new System.Windows.Forms.FlowLayoutPanel();
             this.textBox_penSize = new System.Windows.Forms.TextBox();
             this.btn_brushColor = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.btn_solidPen = new System.Windows.Forms.Button();
             this.btn_dotPen = new System.Windows.Forms.Button();
@@ -77,7 +76,6 @@ namespace Drawing
             this.panel_style.Controls.Add(this.btn_dashdotPen);
             this.panel_style.Controls.Add(this.textBox_penSize);
             this.panel_style.Controls.Add(this.btn_brushColor);
-            this.panel_style.Controls.Add(this.button3);
             this.panel_style.Location = new System.Drawing.Point(732, 12);
             this.panel_style.Name = "panel_style";
             this.panel_style.Size = new System.Drawing.Size(56, 426);
@@ -100,14 +98,6 @@ namespace Drawing
             this.btn_brushColor.TabIndex = 0;
             this.btn_brushColor.UseVisualStyleBackColor = false;
             this.btn_brushColor.Click += new System.EventHandler(this.btn_brushColor_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(3, 254);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(50, 50);
-            this.button3.TabIndex = 0;
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // btn_solidPen
             // 
@@ -221,7 +211,6 @@ namespace Drawing
         private System.Windows.Forms.Button btn_solidPen;
         private System.Windows.Forms.Button btn_dotPen;
         private System.Windows.Forms.Button btn_dashdotPen;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox_penSize;
         private System.Windows.Forms.Button btn_brushColor;
         private System.Windows.Forms.ColorDialog colorDialog1;
