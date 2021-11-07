@@ -45,6 +45,7 @@ namespace Drawing
             m_pen = new Pen(m_color, m_penSize);
             m_pen.DashStyle = m_dashStyle;
 
+            textBox_penSize.Text = m_penSize.ToString();
             DoubleBuffered = true;
         }
 
@@ -53,7 +54,7 @@ namespace Drawing
         {
             if (m_isClicked)
             {
-                Console.WriteLine("---PAINT---");
+                //Console.WriteLine("---PAINT---");
 
                 ReDraw(e.Graphics);
                 
@@ -101,61 +102,34 @@ namespace Drawing
 
             m_end = e.Location;
 
+            IShape temp;
+
             switch (m_mode)
             {
                 case MODE.RECTANGLE:
-                    {
-                        MyRectangle rectangle = new MyRectangle();
-                        rectangle.CalcRect(m_start, m_end);
-
-                        rectangle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-
-                        m_list.RemoveRange(m_count, m_list.Count - m_count);
-                        m_list.Add(rectangle);
-                        m_count++;
-
-                        break;
-                    }
+                    temp = new MyRectangle();
+                    break;
                 case MODE.SQUARE:
-                    {
-                        Square square = new Square();
-                        square.CalcRect(m_start, m_end);
-
-                        square.SetPenStyle(m_penSize, m_color, m_dashStyle);
-
-                        m_list.RemoveRange(m_count, m_list.Count - m_count);
-                        m_list.Add(square);
-                        m_count++;
-
-                        break;
-                    }
+                    temp = new Square();
+                    break;
                 case MODE.TRIANGLE:
-                    {
-                        Triangle triangle = new Triangle();
-                        triangle.CalcRect(m_start, m_end);
-
-                        triangle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-
-                        m_list.RemoveRange(m_count, m_list.Count - m_count);
-                        m_list.Add(triangle);
-                        m_count++;
-
-                        break;
-                    }
+                    temp = new Triangle();
+                    break;
                 case MODE.CIRCLE:
-                    {
-                        Circle circle = new Circle();
-                        circle.CalcRect(m_start, m_end);
-
-                        circle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-
-                        m_list.RemoveRange(m_count, m_list.Count - m_count);
-                        m_list.Add(circle);
-                        m_count++;
-
-                        break;
-                    }
+                    temp = new Circle();
+                    break;
+                default:
+                    return;
             }
+
+            temp.CalcRect(m_start, m_end);
+
+            temp.SetPenStyle(m_penSize, m_color, m_dashStyle);
+
+            m_list.RemoveRange(m_count, m_list.Count - m_count);
+            m_list.Add(temp);
+            m_count++;
+
 
             Console.WriteLine("list count : " + m_list.Count);
 
