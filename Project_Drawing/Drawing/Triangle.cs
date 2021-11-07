@@ -16,14 +16,6 @@ namespace Drawing
 
         public void CalcRect(Point start, Point end)
         {
-            //Point p1, p2;
-            //CalcRect(start, end, out p1, out p2);
-            //
-            //m_points = new Point[3];
-            //m_points[0] = new Point(p1.X, p2.Y);
-            //m_points[1] = new Point(p1.X + Math.Abs(p2.X - p1.X) / 2, p1.Y);
-            //m_points[2] = p2;
-
             Point p1 = new Point(start.X, end.Y);
             Point p2 = new Point((start.X + end.X) / 2, start.Y);
             Point p3 = end;

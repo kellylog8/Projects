@@ -29,8 +29,8 @@ namespace Drawing
 
         Pen m_pen;
 
-        Color m_color;
         float m_penSize;
+        Color m_color;
         DashStyle m_dashStyle;
 
         public Form1()
@@ -48,8 +48,6 @@ namespace Drawing
 
             m_pen = new Pen(m_color, m_penSize);
             m_pen.DashStyle = m_dashStyle;
-
-            DoubleBuffered = true;
         }
 
 
@@ -70,6 +68,26 @@ namespace Drawing
                 return;
 
             m_end = e.Location;
+
+            if (m_isClicked)
+            {
+                switch (m_mode)
+                {
+                    case MODE.RECTANGLE:
+                        {
+                            ReDraw(true);
+                            //m_graphics.Clear(DefaultBackColor);
+
+                            MyRectangle rectangle = new MyRectangle();
+                            rectangle.CalcRect(m_start, m_end);
+
+                            rectangle.SetPenStyle(0.5f, Color.LightGray, DashStyle.Dot);
+                            rectangle.Draw(m_graphics, m_pen);
+                            break;
+                        }
+                }
+
+            }
 
         }
 
@@ -201,6 +219,7 @@ namespace Drawing
             {
                 m_list[i].Draw(m_graphics, m_pen);
             }
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -242,28 +261,16 @@ namespace Drawing
         private void btn_solidPen_Click(object sender, EventArgs e)
         {
             m_dashStyle = DashStyle.Solid;
-
-            //m_pen.Color = m_color;
-            //m_pen.Width = m_penSize;
-            //m_pen.DashStyle = m_dashStyle;
         }
 
         private void btn_dotPen_Click(object sender, EventArgs e)
         {
             m_dashStyle = DashStyle.Dot;
-
-            //m_pen.Color = m_color;
-            //m_pen.Width = m_penSize;
-            //m_pen.DashStyle = m_dashStyle;
         }
 
         private void btn_dashdotPen_Click(object sender, EventArgs e)
         {
             m_dashStyle = DashStyle.DashDot;
-
-            //m_pen.Color = m_color;
-            //m_pen.Width = m_penSize;
-            //m_pen.DashStyle = m_dashStyle;
         }
 
         private void textBox_penSize_KeyDown(object sender, KeyEventArgs e)
@@ -278,6 +285,7 @@ namespace Drawing
 
                 m_pen.Width = m_penSize;
             }
+
         }
 
         private void btn_brushColor_Click(object sender, EventArgs e)
