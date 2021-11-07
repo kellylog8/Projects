@@ -43,10 +43,12 @@ namespace Drawing
             m_rect = new Rectangle(p1.X, p1.Y, length, length);
         }
 
-        public void Draw(Graphics canvas)
+        public void Draw(Graphics canvas, Pen pen)
         {
-            Pen pen = new Pen(m_penStyle.color, m_penStyle.size);
+            pen.Color = m_penStyle.color;
+            pen.Width = m_penStyle.size;
             pen.DashStyle = m_penStyle.dash;
+
             canvas.DrawArc(pen, m_rect, 0.0f, 360.0f);
         }
 

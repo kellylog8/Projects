@@ -22,6 +22,6 @@ namespace Drawing
 
         void CalcRect(Point start, Point end);
 
-        void Draw(Graphics canvas);
+        void Draw(Graphics canvas, Pen pen);
     }
 }

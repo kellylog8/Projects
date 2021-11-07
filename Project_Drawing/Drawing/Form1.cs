@@ -90,7 +90,7 @@ namespace Drawing
                         rectangle.CalcRect(m_start, m_end);
 
                         rectangle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-                        rectangle.Draw(m_graphics);
+                        rectangle.Draw(m_graphics, m_pen);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
                         m_list.Add(rectangle);
@@ -103,7 +103,7 @@ namespace Drawing
                         square.CalcRect(m_start, m_end);
 
                         square.SetPenStyle(m_penSize, m_color, m_dashStyle);
-                        square.Draw(m_graphics);
+                        square.Draw(m_graphics, m_pen);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
                         m_list.Add(square);
@@ -118,7 +118,7 @@ namespace Drawing
                         circle.CalcRect(m_start, m_end);
 
                         circle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-                        circle.Draw(m_graphics);
+                        circle.Draw(m_graphics, m_pen);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
                         m_list.Add(circle);
@@ -190,7 +190,7 @@ namespace Drawing
 
             for (int i = 0; i < m_count; i++)
             {
-                m_list[i].Draw(m_graphics);
+                m_list[i].Draw(m_graphics, m_pen);
             }
         }
 

@@ -20,10 +20,12 @@ namespace Drawing
             CalcRect(start, end, out m_rect);
         }
 
-        public void Draw(Graphics canvas)
+        public void Draw(Graphics canvas, Pen pen)
         {
-            Pen pen = new Pen(m_penStyle.color, m_penStyle.size);
+            pen.Color = m_penStyle.color;
+            pen.Width = m_penStyle.size;
             pen.DashStyle = m_penStyle.dash;
+
             canvas.DrawRectangle(pen, m_rect);
         }
 
