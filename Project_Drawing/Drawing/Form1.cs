@@ -22,8 +22,6 @@ namespace Drawing
         Point m_start;
         Point m_end;
 
-        Graphics m_graphics;
-
         List<IShape> m_list = new List<IShape>();
         int m_count = 0;
 
@@ -40,19 +38,39 @@ namespace Drawing
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            m_graphics = CreateGraphics();
-
             m_penSize = 1.0f;
             m_color = Color.Black;
             m_dashStyle = DashStyle.Solid;
 
             m_pen = new Pen(m_color, m_penSize);
             m_pen.DashStyle = m_dashStyle;
+
+            DoubleBuffered = true;
         }
 
 
+        private void canvas_Paint(object sender, PaintEventArgs e)
+        {
+            if (m_isClicked)
+            {
+                Console.WriteLine("---PAINT---");
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
+                ReDraw(e.Graphics);
+                
+                MyRectangle rectangle = new MyRectangle();
+                rectangle.CalcRect(m_start, m_end);
+                
+                rectangle.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
+                rectangle.Draw(e.Graphics, m_pen);
+
+                return;
+            }
+
+            ReDraw(e.Graphics);
+
+        }
+
+        private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             if (m_mode == MODE.DEFAULT)
                 return;
@@ -62,7 +80,7 @@ namespace Drawing
             m_isClicked = true;
         }
 
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (m_mode == MODE.DEFAULT)
                 return;
@@ -71,27 +89,12 @@ namespace Drawing
 
             if (m_isClicked)
             {
-                switch (m_mode)
-                {
-                    case MODE.RECTANGLE:
-                        {
-                            ReDraw(true);
-                            //m_graphics.Clear(DefaultBackColor);
-
-                            MyRectangle rectangle = new MyRectangle();
-                            rectangle.CalcRect(m_start, m_end);
-
-                            rectangle.SetPenStyle(0.5f, Color.LightGray, DashStyle.Dot);
-                            rectangle.Draw(m_graphics, m_pen);
-                            break;
-                        }
-                }
-
+                canvas.Refresh();
             }
 
         }
 
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
             if (m_mode == MODE.DEFAULT)
                 return;
@@ -106,11 +109,11 @@ namespace Drawing
                         rectangle.CalcRect(m_start, m_end);
 
                         rectangle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-                        rectangle.Draw(m_graphics, m_pen);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
                         m_list.Add(rectangle);
                         m_count++;
+
                         break;
                     }
                 case MODE.SQUARE:
@@ -119,11 +122,11 @@ namespace Drawing
                         square.CalcRect(m_start, m_end);
 
                         square.SetPenStyle(m_penSize, m_color, m_dashStyle);
-                        square.Draw(m_graphics, m_pen);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
                         m_list.Add(square);
                         m_count++;
+
                         break;
                     }
                 case MODE.TRIANGLE:
@@ -132,11 +135,11 @@ namespace Drawing
                         triangle.CalcRect(m_start, m_end);
 
                         triangle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-                        triangle.Draw(m_graphics, m_pen);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
                         m_list.Add(triangle);
                         m_count++;
+
                         break;
                     }
                 case MODE.CIRCLE:
@@ -145,11 +148,11 @@ namespace Drawing
                         circle.CalcRect(m_start, m_end);
 
                         circle.SetPenStyle(m_penSize, m_color, m_dashStyle);
-                        circle.Draw(m_graphics, m_pen);
 
                         m_list.RemoveRange(m_count, m_list.Count - m_count);
                         m_list.Add(circle);
                         m_count++;
+
                         break;
                     }
             }
@@ -157,9 +160,8 @@ namespace Drawing
             Console.WriteLine("list count : " + m_list.Count);
 
             m_isClicked = false;
+            canvas.Refresh();
         }
-
-
 
         private void Form1_Resize(object sender, EventArgs e)
         {
@@ -172,13 +174,10 @@ namespace Drawing
             panel_shape.SetBounds(marginX, marginY, panelWidth, control.ClientSize.Height - marginY * 2);
             panel_style.SetBounds(ClientSize.Width - marginX - panelWidth, marginY, panelWidth, ClientSize.Height - 20);
 
-            if (m_graphics != null)
-            {
-                m_graphics.Dispose();
-                m_graphics = CreateGraphics();
-                ReDraw();
-            }
-            
+            int canvasMarginX = marginX + panelWidth + marginX;
+            canvas.SetBounds(canvasMarginX, marginY, ClientSize.Width - canvasMarginX * 2, ClientSize.Height - marginY * 2);
+
+            canvas.Refresh();
         }
 
 
@@ -210,14 +209,14 @@ namespace Drawing
 
 
 
-        private void ReDraw(bool isClear = true)
+        private void ReDraw(Graphics graphics, bool isClear = true)
         {
             if (isClear)
-                m_graphics.Clear(BackColor);
+                graphics.Clear(BackColor);
 
             for (int i = 0; i < m_count; i++)
             {
-                m_list[i].Draw(m_graphics, m_pen);
+                m_list[i].Draw(graphics, m_pen);
             }
 
         }
@@ -227,11 +226,13 @@ namespace Drawing
             if (e.KeyCode == Keys.R)
             {
                 Console.WriteLine("R key");
-                m_graphics.Clear(BackColor);
+
+                canvas.CreateGraphics().Clear(BackColor);
             }
             else if (e.KeyCode == Keys.T)
             {
-                ReDraw(false);
+                //ReDraw(false);
+                canvas.Refresh();
             }
             else if (e.Control && e.Shift && e.KeyCode == Keys.Z)
             {
@@ -241,7 +242,8 @@ namespace Drawing
                 if (m_count > m_list.Count)
                     m_count = m_list.Count;
 
-                ReDraw();
+                //ReDraw();
+                canvas.Refresh();
             }
             else if (e.Control && e.KeyCode == Keys.Z)
             {
@@ -251,11 +253,11 @@ namespace Drawing
                 if (m_count < 0)
                     m_count = 0;
 
-                ReDraw();
+                //ReDraw();
+                canvas.Refresh();
             }
 
         }
-
 
 
         private void btn_solidPen_Click(object sender, EventArgs e)
@@ -273,11 +275,20 @@ namespace Drawing
             m_dashStyle = DashStyle.DashDot;
         }
 
+
         private void textBox_penSize_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                float penSize = float.Parse(textBox_penSize.Text);
+                float penSize = 1.0f;
+                bool isNumber = float.TryParse(textBox_penSize.Text, out penSize);
+
+                if (!isNumber)
+                {
+                    textBox_penSize.Text = m_penSize.ToString();
+                    return;
+                }
+
                 if (penSize < 0.0f)
                     penSize = 0.0f;
 
