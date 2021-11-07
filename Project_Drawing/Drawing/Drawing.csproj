@@ -100,5 +100,23 @@
   <ItemGroup>
     <None Include="Resources\triangle.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashdotline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dotline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\solidline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\solidline_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dotline_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashdotline_2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
