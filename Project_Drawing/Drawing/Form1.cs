@@ -138,7 +138,12 @@ namespace Drawing
         {
             Control control = (Control)sender;
 
-            panel_shape.SetBounds(10, 10, 55, control.ClientSize.Height-20);
+            int marginX = 10;
+            int marginY = 10;
+            int panelWidth = 55;
+
+            panel_shape.SetBounds(marginX, marginY, panelWidth, control.ClientSize.Height - marginY * 2);
+            panel_style.SetBounds(ClientSize.Width - marginX - panelWidth, marginY, panelWidth, ClientSize.Height - 20);
 
             if (m_graphics != null)
             {
