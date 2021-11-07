@@ -14,7 +14,7 @@ namespace Drawing
 {
     public partial class Form1 : Form
     {
-        enum MODE { DEFAULT, RECTANGLE, SQUARE, TRIANGLE, CIRCLE };
+        enum MODE { DEFAULT, RECTANGLE, SQUARE, TRIANGLE, CIRCLE, LINE };
         MODE m_mode = MODE.DEFAULT;
 
         bool m_isClicked = false;
@@ -58,11 +58,22 @@ namespace Drawing
 
                 ReDraw(e.Graphics);
                 
-                MyRectangle rectangle = new MyRectangle();
-                rectangle.CalcRect(m_start, m_end);
-                
-                rectangle.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
-                rectangle.Draw(e.Graphics, m_pen);
+                if (m_mode == MODE.LINE)
+                {
+                    Line line = new Line();
+                    line.CalcRect(m_start, m_end);
+
+                    line.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
+                    line.Draw(e.Graphics, m_pen);
+                }
+                else
+                {
+                    MyRectangle rectangle = new MyRectangle();
+                    rectangle.CalcRect(m_start, m_end);
+
+                    rectangle.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
+                    rectangle.Draw(e.Graphics, m_pen);
+                }
 
                 return;
             }
@@ -106,6 +117,9 @@ namespace Drawing
 
             switch (m_mode)
             {
+                case MODE.LINE:
+                    temp = new Line();
+                    break;
                 case MODE.RECTANGLE:
                     temp = new MyRectangle();
                     break;
@@ -159,6 +173,11 @@ namespace Drawing
         private void btn_default_Click(object sender, EventArgs e)
         {
             m_mode = MODE.DEFAULT;
+        }
+
+        private void btn_line_Click(object sender, EventArgs e)
+        {
+            m_mode = MODE.LINE;
         }
 
         private void btn_rectangle_Click(object sender, EventArgs e)

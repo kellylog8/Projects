@@ -57,6 +57,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IShape.cs" />
+    <Compile Include="Line.cs" />
     <Compile Include="MyRectangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dashdotline_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
