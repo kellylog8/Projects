@@ -16,21 +16,10 @@ namespace Drawing
 
         public void CalcRect(Point start, Point end)
         {
-            // 라디안 변환공식 : 2*파이*(도/360) -> 파이/180*도
-            double radian = Math.PI / 180.0;
-
             int centerX = (end.X + start.X) / 2;
             int centerY = (end.Y + start.Y) / 2;
             double r = Math.Abs(end.X - start.X) / 2.0;
 
-            for (double angle = 0.0; angle < 360.0; angle += 1.0)
-            {
-                int x = centerX + (int)(r * Math.Cos(radian * angle));
-                int y = centerY + (int)(r * Math.Sin(radian * angle));
-
-                //m_graphics.FillEllipse(m_redPen.Brush, new Rectangle(x - 5, y - 5, 10, 10));
-
-            }
 
             Point center = new Point(centerX, centerY);
 
@@ -41,7 +30,7 @@ namespace Drawing
             CalcPointPosition(center, r, 18.0 + 72.0 * 3.0, out p4);
             CalcPointPosition(center, r, 18.0 + 72.0 * 4.0, out p5);
 
-            m_points = new Point[] { p1, p3, p5, p2, p4, p1 };
+            m_points = new Point[] { p1, p3, p5, p2, p4 };
         }
 
         void CalcPointPosition(Point center, double radius, double angle, out Point point)
@@ -63,6 +52,30 @@ namespace Drawing
             if (m_points == null)
                 return;
             canvas.DrawPolygon(pen, m_points);
+        }
+
+        public void Draw_Guildline(Graphics canvas, Pen pen, Point start, Point end)
+        {
+            pen.Color = m_penStyle.color;
+            pen.Width = m_penStyle.size;
+            pen.DashStyle = m_penStyle.dash;
+
+            // 라디안 변환공식 : 2*파이*(도/360) -> 파이/180*도
+            double radian = Math.PI / 180.0;
+
+            int centerX = (end.X + start.X) / 2;
+            int centerY = (end.Y + start.Y) / 2;
+            double r = Math.Abs(end.X - start.X) / 2.0;
+
+            for (double angle = 0.0; angle < 360.0; angle += 1.0)
+            {
+                int x = centerX + (int)(r * Math.Cos(radian * angle));
+                int y = centerY + (int)(r * Math.Sin(radian * angle));
+
+                int pointSize = 1;
+                Rectangle rect = new Rectangle(x - pointSize, y - pointSize, pointSize * 2, pointSize * 2);
+                canvas.FillEllipse(pen.Brush, rect);
+            }
         }
 
         public void SetPenStyle(float size, Color color, DashStyle dash)

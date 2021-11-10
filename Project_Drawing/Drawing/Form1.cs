@@ -57,8 +57,16 @@ namespace Drawing
                 //Console.WriteLine("---PAINT---");
 
                 ReDraw(e.Graphics);
-                
-                if (m_mode == MODE.LINE)
+
+                if (m_mode == MODE.SQUARE || m_mode == MODE.CIRCLE)
+                {
+                    Square square = new Square();
+                    square.CalcRect(m_start, m_end);
+
+                    square.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
+                    square.Draw(e.Graphics, m_pen);
+                }
+                else if (m_mode == MODE.LINE)
                 {
                     Line line = new Line();
                     line.CalcRect(m_start, m_end);
@@ -66,21 +74,22 @@ namespace Drawing
                     line.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
                     line.Draw(e.Graphics, m_pen);
                 }
-                if (m_mode == MODE.PENTAGON)
+                else if (m_mode == MODE.PENTAGON)
                 {
                     Pentagon pentagon = new Pentagon();
-                    //pentagon.CalcRect(m_start, m_end);
+                    pentagon.CalcRect(m_start, m_end);
 
                     pentagon.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
-                    //pentagon.Draw(e.Graphics, m_pen);
+                    pentagon.Draw(e.Graphics, m_pen);
                 }
-                if (m_mode == MODE.STAR)
+                else if (m_mode == MODE.STAR)
                 {
                     Star star = new Star();
                     star.CalcRect(m_start, m_end);
 
                     star.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
                     star.Draw(e.Graphics, m_pen);
+                    star.Draw_Guildline(e.Graphics, m_pen, m_start, m_end);
                 }
                 else
                 {

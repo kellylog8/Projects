@@ -62,6 +62,7 @@ namespace Drawing
             this.panel_shape.Controls.Add(this.btn_triangle);
             this.panel_shape.Controls.Add(this.btn_circle);
             this.panel_shape.Controls.Add(this.btn_pentagon);
+            this.panel_shape.Controls.Add(this.btn_star);
             this.panel_shape.Location = new System.Drawing.Point(12, 12);
             this.panel_shape.Name = "panel_shape";
             this.panel_shape.Size = new System.Drawing.Size(56, 426);
@@ -140,7 +141,6 @@ namespace Drawing
             this.panel_style.Controls.Add(this.textBox_penSize);
             this.panel_style.Controls.Add(this.btn_brushColor);
             this.panel_style.Controls.Add(this.button1);
-            this.panel_style.Controls.Add(this.btn_star);
             this.panel_style.Location = new System.Drawing.Point(732, 12);
             this.panel_style.Name = "panel_style";
             this.panel_style.Size = new System.Drawing.Size(56, 426);
@@ -229,7 +229,7 @@ namespace Drawing
             // 
             // btn_star
             // 
-            this.btn_star.Location = new System.Drawing.Point(3, 310);
+            this.btn_star.Location = new System.Drawing.Point(3, 395);
             this.btn_star.Name = "btn_star";
             this.btn_star.Size = new System.Drawing.Size(50, 50);
             this.btn_star.TabIndex = 0;
