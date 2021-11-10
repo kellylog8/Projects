@@ -31,6 +31,7 @@ namespace Drawing
         {
             this.panel_shape = new System.Windows.Forms.FlowLayoutPanel();
             this.btn_default = new System.Windows.Forms.Button();
+            this.btn_line = new System.Windows.Forms.Button();
             this.btn_rectangle = new System.Windows.Forms.Button();
             this.btn_square = new System.Windows.Forms.Button();
             this.btn_triangle = new System.Windows.Forms.Button();
@@ -44,7 +45,8 @@ namespace Drawing
             this.button1 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.canvas = new System.Windows.Forms.PictureBox();
-            this.btn_line = new System.Windows.Forms.Button();
+            this.btn_pentagon = new System.Windows.Forms.Button();
+            this.btn_star = new System.Windows.Forms.Button();
             this.panel_shape.SuspendLayout();
             this.panel_style.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
@@ -59,6 +61,7 @@ namespace Drawing
             this.panel_shape.Controls.Add(this.btn_square);
             this.panel_shape.Controls.Add(this.btn_triangle);
             this.panel_shape.Controls.Add(this.btn_circle);
+            this.panel_shape.Controls.Add(this.btn_pentagon);
             this.panel_shape.Location = new System.Drawing.Point(12, 12);
             this.panel_shape.Name = "panel_shape";
             this.panel_shape.Size = new System.Drawing.Size(56, 426);
@@ -72,6 +75,17 @@ namespace Drawing
             this.btn_default.TabIndex = 0;
             this.btn_default.UseVisualStyleBackColor = true;
             this.btn_default.Click += new System.EventHandler(this.btn_default_Click);
+            // 
+            // btn_line
+            // 
+            this.btn_line.BackgroundImage = global::Drawing.Properties.Resources.line;
+            this.btn_line.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_line.Location = new System.Drawing.Point(3, 59);
+            this.btn_line.Name = "btn_line";
+            this.btn_line.Size = new System.Drawing.Size(50, 50);
+            this.btn_line.TabIndex = 0;
+            this.btn_line.UseVisualStyleBackColor = true;
+            this.btn_line.Click += new System.EventHandler(this.btn_line_Click);
             // 
             // btn_rectangle
             // 
@@ -126,6 +140,7 @@ namespace Drawing
             this.panel_style.Controls.Add(this.textBox_penSize);
             this.panel_style.Controls.Add(this.btn_brushColor);
             this.panel_style.Controls.Add(this.button1);
+            this.panel_style.Controls.Add(this.btn_star);
             this.panel_style.Location = new System.Drawing.Point(732, 12);
             this.panel_style.Name = "panel_style";
             this.panel_style.Size = new System.Drawing.Size(56, 426);
@@ -203,16 +218,23 @@ namespace Drawing
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
-            // btn_line
+            // btn_pentagon
             // 
-            this.btn_line.BackgroundImage = global::Drawing.Properties.Resources.line;
-            this.btn_line.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_line.Location = new System.Drawing.Point(3, 59);
-            this.btn_line.Name = "btn_line";
-            this.btn_line.Size = new System.Drawing.Size(50, 50);
-            this.btn_line.TabIndex = 0;
-            this.btn_line.UseVisualStyleBackColor = true;
-            this.btn_line.Click += new System.EventHandler(this.btn_line_Click);
+            this.btn_pentagon.Location = new System.Drawing.Point(3, 339);
+            this.btn_pentagon.Name = "btn_pentagon";
+            this.btn_pentagon.Size = new System.Drawing.Size(50, 50);
+            this.btn_pentagon.TabIndex = 0;
+            this.btn_pentagon.UseVisualStyleBackColor = true;
+            this.btn_pentagon.Click += new System.EventHandler(this.btn_pentagon_Click);
+            // 
+            // btn_star
+            // 
+            this.btn_star.Location = new System.Drawing.Point(3, 310);
+            this.btn_star.Name = "btn_star";
+            this.btn_star.Size = new System.Drawing.Size(50, 50);
+            this.btn_star.TabIndex = 0;
+            this.btn_star.UseVisualStyleBackColor = true;
+            this.btn_star.Click += new System.EventHandler(this.btn_star_Click);
             // 
             // Form1
             // 
@@ -254,6 +276,8 @@ namespace Drawing
         private System.Windows.Forms.PictureBox canvas;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_line;
+        private System.Windows.Forms.Button btn_pentagon;
+        private System.Windows.Forms.Button btn_star;
     }
 }
 

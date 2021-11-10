@@ -14,7 +14,7 @@ namespace Drawing
 {
     public partial class Form1 : Form
     {
-        enum MODE { DEFAULT, RECTANGLE, SQUARE, TRIANGLE, CIRCLE, LINE };
+        enum MODE { DEFAULT, RECTANGLE, SQUARE, TRIANGLE, CIRCLE, LINE, PENTAGON, STAR };
         MODE m_mode = MODE.DEFAULT;
 
         bool m_isClicked = false;
@@ -65,6 +65,22 @@ namespace Drawing
 
                     line.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
                     line.Draw(e.Graphics, m_pen);
+                }
+                if (m_mode == MODE.PENTAGON)
+                {
+                    Pentagon pentagon = new Pentagon();
+                    //pentagon.CalcRect(m_start, m_end);
+
+                    pentagon.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
+                    //pentagon.Draw(e.Graphics, m_pen);
+                }
+                if (m_mode == MODE.STAR)
+                {
+                    Star star = new Star();
+                    star.CalcRect(m_start, m_end);
+
+                    star.SetPenStyle(2.0f, Color.LightGray, DashStyle.Dot);
+                    star.Draw(e.Graphics, m_pen);
                 }
                 else
                 {
@@ -132,6 +148,12 @@ namespace Drawing
                 case MODE.CIRCLE:
                     temp = new Circle();
                     break;
+                case MODE.PENTAGON:
+                    temp = new Pentagon();
+                    break;
+                case MODE.STAR:
+                    temp = new Star();
+                    break;
                 default:
                     return;
             }
@@ -198,6 +220,16 @@ namespace Drawing
         private void btn_circle_Click(object sender, EventArgs e)
         {
             m_mode = MODE.CIRCLE;
+        }
+
+        private void btn_pentagon_Click(object sender, EventArgs e)
+        {
+            m_mode = MODE.PENTAGON;
+        }
+
+        private void btn_star_Click(object sender, EventArgs e)
+        {
+            m_mode = MODE.STAR;
         }
 
 
@@ -306,5 +338,6 @@ namespace Drawing
 
         }
 
+        
     }
 }

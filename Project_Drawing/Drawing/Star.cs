@@ -8,34 +8,50 @@ using System.Threading.Tasks;
 
 namespace Drawing
 {
-    class Square : IShape
+    class Star : IShape
     {
-        Rectangle m_rect;
+        Point[] m_points;
 
         PenStyle m_penStyle;
 
         public void CalcRect(Point start, Point end)
         {
-            Point p1, p2;
-            CalcRect(start, end, out p1, out p2);
+            // 라디안 변환공식 : 2*파이*(도/360) -> 파이/180*도
+            double radian = Math.PI / 180.0;
 
+            int centerX = (end.X + start.X) / 2;
+            int centerY = (end.Y + start.Y) / 2;
+            double r = Math.Abs(end.X - start.X) / 2.0;
 
-            int width = Math.Abs(p2.X - p1.X);
-            int height = Math.Abs(p2.Y - p1.Y);
-
-            int length = width;
-
-            if (width < height)
+            for (double angle = 0.0; angle < 360.0; angle += 1.0)
             {
-                length = width;
-            }
-            else if (width > height)
-            {
-                length = height;
+                int x = centerX + (int)(r * Math.Cos(radian * angle));
+                int y = centerY + (int)(r * Math.Sin(radian * angle));
+
+                //m_graphics.FillEllipse(m_redPen.Brush, new Rectangle(x - 5, y - 5, 10, 10));
+
             }
 
-            m_rect = new Rectangle(p1.X, p1.Y, length, length);
+            Point center = new Point(centerX, centerY);
 
+            Point p1, p2, p3, p4, p5;
+            CalcPointPosition(center, r, 18.0 + 72.0 * 0.0, out p1);
+            CalcPointPosition(center, r, 18.0 + 72.0 * 1.0, out p2);
+            CalcPointPosition(center, r, 18.0 + 72.0 * 2.0, out p3);
+            CalcPointPosition(center, r, 18.0 + 72.0 * 3.0, out p4);
+            CalcPointPosition(center, r, 18.0 + 72.0 * 4.0, out p5);
+
+            m_points = new Point[] { p1, p3, p5, p2, p4, p1 };
+        }
+
+        void CalcPointPosition(Point center, double radius, double angle, out Point point)
+        {
+            double radian = Math.PI / 180.0 * angle;
+
+            int x = center.X + (int)(radius * Math.Cos(radian));
+            int y = center.Y - (int)(radius * Math.Sin(radian));
+
+            point = new Point(x, y);
         }
 
         public void Draw(Graphics canvas, Pen pen)
@@ -44,7 +60,9 @@ namespace Drawing
             pen.Width = m_penStyle.size;
             pen.DashStyle = m_penStyle.dash;
 
-            canvas.DrawRectangle(pen, m_rect);
+            if (m_points == null)
+                return;
+            canvas.DrawPolygon(pen, m_points);
         }
 
         public void SetPenStyle(float size, Color color, DashStyle dash)
@@ -93,6 +111,6 @@ namespace Drawing
 
         }
 
-        
+
     }
 }

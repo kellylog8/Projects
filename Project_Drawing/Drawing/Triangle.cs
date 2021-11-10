@@ -10,9 +10,9 @@ namespace Drawing
 {
     class Triangle : IShape
     {
-        PenStyle m_penStyle;
-
         Point[] m_points;
+
+        PenStyle m_penStyle;
 
         public void CalcRect(Point start, Point end)
         {
