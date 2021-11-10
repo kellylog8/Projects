@@ -31,22 +31,22 @@ namespace Drawing
         {
             this.panel_shape = new System.Windows.Forms.FlowLayoutPanel();
             this.btn_default = new System.Windows.Forms.Button();
+            this.panel_style = new System.Windows.Forms.FlowLayoutPanel();
+            this.textBox_penSize = new System.Windows.Forms.TextBox();
+            this.btn_brushColor = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.btn_star = new System.Windows.Forms.Button();
+            this.canvas = new System.Windows.Forms.PictureBox();
+            this.btn_solidPen = new System.Windows.Forms.Button();
+            this.btn_dotPen = new System.Windows.Forms.Button();
+            this.btn_dashdotPen = new System.Windows.Forms.Button();
             this.btn_line = new System.Windows.Forms.Button();
             this.btn_rectangle = new System.Windows.Forms.Button();
             this.btn_square = new System.Windows.Forms.Button();
             this.btn_triangle = new System.Windows.Forms.Button();
             this.btn_circle = new System.Windows.Forms.Button();
-            this.panel_style = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_solidPen = new System.Windows.Forms.Button();
-            this.btn_dotPen = new System.Windows.Forms.Button();
-            this.btn_dashdotPen = new System.Windows.Forms.Button();
-            this.textBox_penSize = new System.Windows.Forms.TextBox();
-            this.btn_brushColor = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.canvas = new System.Windows.Forms.PictureBox();
             this.btn_pentagon = new System.Windows.Forms.Button();
-            this.btn_star = new System.Windows.Forms.Button();
             this.panel_shape.SuspendLayout();
             this.panel_style.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
@@ -65,7 +65,7 @@ namespace Drawing
             this.panel_shape.Controls.Add(this.btn_star);
             this.panel_shape.Location = new System.Drawing.Point(12, 12);
             this.panel_shape.Name = "panel_shape";
-            this.panel_shape.Size = new System.Drawing.Size(56, 426);
+            this.panel_shape.Size = new System.Drawing.Size(56, 451);
             this.panel_shape.TabIndex = 0;
             // 
             // btn_default
@@ -76,6 +76,104 @@ namespace Drawing
             this.btn_default.TabIndex = 0;
             this.btn_default.UseVisualStyleBackColor = true;
             this.btn_default.Click += new System.EventHandler(this.btn_default_Click);
+            // 
+            // panel_style
+            // 
+            this.panel_style.BackColor = System.Drawing.Color.Silver;
+            this.panel_style.Controls.Add(this.btn_solidPen);
+            this.panel_style.Controls.Add(this.btn_dotPen);
+            this.panel_style.Controls.Add(this.btn_dashdotPen);
+            this.panel_style.Controls.Add(this.textBox_penSize);
+            this.panel_style.Controls.Add(this.btn_brushColor);
+            this.panel_style.Controls.Add(this.button1);
+            this.panel_style.Location = new System.Drawing.Point(732, 12);
+            this.panel_style.Name = "panel_style";
+            this.panel_style.Size = new System.Drawing.Size(56, 451);
+            this.panel_style.TabIndex = 1;
+            // 
+            // textBox_penSize
+            // 
+            this.textBox_penSize.Location = new System.Drawing.Point(3, 171);
+            this.textBox_penSize.Name = "textBox_penSize";
+            this.textBox_penSize.Size = new System.Drawing.Size(50, 21);
+            this.textBox_penSize.TabIndex = 1;
+            this.textBox_penSize.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_penSize_KeyDown);
+            // 
+            // btn_brushColor
+            // 
+            this.btn_brushColor.BackColor = System.Drawing.Color.Black;
+            this.btn_brushColor.Location = new System.Drawing.Point(3, 198);
+            this.btn_brushColor.Name = "btn_brushColor";
+            this.btn_brushColor.Size = new System.Drawing.Size(50, 50);
+            this.btn_brushColor.TabIndex = 0;
+            this.btn_brushColor.UseVisualStyleBackColor = false;
+            this.btn_brushColor.Click += new System.EventHandler(this.btn_brushColor_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 254);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 50);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            // 
+            // btn_star
+            // 
+            this.btn_star.BackgroundImage = global::Drawing.Properties.Resources.star;
+            this.btn_star.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_star.Location = new System.Drawing.Point(3, 395);
+            this.btn_star.Name = "btn_star";
+            this.btn_star.Size = new System.Drawing.Size(50, 50);
+            this.btn_star.TabIndex = 0;
+            this.btn_star.UseVisualStyleBackColor = true;
+            this.btn_star.Click += new System.EventHandler(this.btn_star_Click);
+            // 
+            // canvas
+            // 
+            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.canvas.Location = new System.Drawing.Point(74, 12);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(652, 451);
+            this.canvas.TabIndex = 2;
+            this.canvas.TabStop = false;
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
+            // 
+            // btn_solidPen
+            // 
+            this.btn_solidPen.BackgroundImage = global::Drawing.Properties.Resources.solidline_2;
+            this.btn_solidPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_solidPen.Location = new System.Drawing.Point(3, 3);
+            this.btn_solidPen.Name = "btn_solidPen";
+            this.btn_solidPen.Size = new System.Drawing.Size(50, 50);
+            this.btn_solidPen.TabIndex = 0;
+            this.btn_solidPen.UseVisualStyleBackColor = true;
+            this.btn_solidPen.Click += new System.EventHandler(this.btn_solidPen_Click);
+            // 
+            // btn_dotPen
+            // 
+            this.btn_dotPen.BackgroundImage = global::Drawing.Properties.Resources.dotline_2;
+            this.btn_dotPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_dotPen.Location = new System.Drawing.Point(3, 59);
+            this.btn_dotPen.Name = "btn_dotPen";
+            this.btn_dotPen.Size = new System.Drawing.Size(50, 50);
+            this.btn_dotPen.TabIndex = 0;
+            this.btn_dotPen.UseVisualStyleBackColor = true;
+            this.btn_dotPen.Click += new System.EventHandler(this.btn_dotPen_Click);
+            // 
+            // btn_dashdotPen
+            // 
+            this.btn_dashdotPen.BackgroundImage = global::Drawing.Properties.Resources.dashdotline_2;
+            this.btn_dashdotPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_dashdotPen.Location = new System.Drawing.Point(3, 115);
+            this.btn_dashdotPen.Name = "btn_dashdotPen";
+            this.btn_dashdotPen.Size = new System.Drawing.Size(50, 50);
+            this.btn_dashdotPen.TabIndex = 0;
+            this.btn_dashdotPen.UseVisualStyleBackColor = true;
+            this.btn_dashdotPen.Click += new System.EventHandler(this.btn_dashdotPen_Click);
             // 
             // btn_line
             // 
@@ -132,94 +230,10 @@ namespace Drawing
             this.btn_circle.UseVisualStyleBackColor = true;
             this.btn_circle.Click += new System.EventHandler(this.btn_circle_Click);
             // 
-            // panel_style
-            // 
-            this.panel_style.BackColor = System.Drawing.Color.Silver;
-            this.panel_style.Controls.Add(this.btn_solidPen);
-            this.panel_style.Controls.Add(this.btn_dotPen);
-            this.panel_style.Controls.Add(this.btn_dashdotPen);
-            this.panel_style.Controls.Add(this.textBox_penSize);
-            this.panel_style.Controls.Add(this.btn_brushColor);
-            this.panel_style.Controls.Add(this.button1);
-            this.panel_style.Location = new System.Drawing.Point(732, 12);
-            this.panel_style.Name = "panel_style";
-            this.panel_style.Size = new System.Drawing.Size(56, 426);
-            this.panel_style.TabIndex = 1;
-            // 
-            // btn_solidPen
-            // 
-            this.btn_solidPen.BackgroundImage = global::Drawing.Properties.Resources.solidline_2;
-            this.btn_solidPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_solidPen.Location = new System.Drawing.Point(3, 3);
-            this.btn_solidPen.Name = "btn_solidPen";
-            this.btn_solidPen.Size = new System.Drawing.Size(50, 50);
-            this.btn_solidPen.TabIndex = 0;
-            this.btn_solidPen.UseVisualStyleBackColor = true;
-            this.btn_solidPen.Click += new System.EventHandler(this.btn_solidPen_Click);
-            // 
-            // btn_dotPen
-            // 
-            this.btn_dotPen.BackgroundImage = global::Drawing.Properties.Resources.dotline_2;
-            this.btn_dotPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_dotPen.Location = new System.Drawing.Point(3, 59);
-            this.btn_dotPen.Name = "btn_dotPen";
-            this.btn_dotPen.Size = new System.Drawing.Size(50, 50);
-            this.btn_dotPen.TabIndex = 0;
-            this.btn_dotPen.UseVisualStyleBackColor = true;
-            this.btn_dotPen.Click += new System.EventHandler(this.btn_dotPen_Click);
-            // 
-            // btn_dashdotPen
-            // 
-            this.btn_dashdotPen.BackgroundImage = global::Drawing.Properties.Resources.dashdotline_2;
-            this.btn_dashdotPen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_dashdotPen.Location = new System.Drawing.Point(3, 115);
-            this.btn_dashdotPen.Name = "btn_dashdotPen";
-            this.btn_dashdotPen.Size = new System.Drawing.Size(50, 50);
-            this.btn_dashdotPen.TabIndex = 0;
-            this.btn_dashdotPen.UseVisualStyleBackColor = true;
-            this.btn_dashdotPen.Click += new System.EventHandler(this.btn_dashdotPen_Click);
-            // 
-            // textBox_penSize
-            // 
-            this.textBox_penSize.Location = new System.Drawing.Point(3, 171);
-            this.textBox_penSize.Name = "textBox_penSize";
-            this.textBox_penSize.Size = new System.Drawing.Size(50, 21);
-            this.textBox_penSize.TabIndex = 1;
-            this.textBox_penSize.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_penSize_KeyDown);
-            // 
-            // btn_brushColor
-            // 
-            this.btn_brushColor.BackColor = System.Drawing.Color.Black;
-            this.btn_brushColor.Location = new System.Drawing.Point(3, 198);
-            this.btn_brushColor.Name = "btn_brushColor";
-            this.btn_brushColor.Size = new System.Drawing.Size(50, 50);
-            this.btn_brushColor.TabIndex = 0;
-            this.btn_brushColor.UseVisualStyleBackColor = false;
-            this.btn_brushColor.Click += new System.EventHandler(this.btn_brushColor_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 254);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 50);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // canvas
-            // 
-            this.canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.canvas.Location = new System.Drawing.Point(74, 12);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(652, 426);
-            this.canvas.TabIndex = 2;
-            this.canvas.TabStop = false;
-            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
-            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
-            this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
-            this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
-            // 
             // btn_pentagon
             // 
+            this.btn_pentagon.BackgroundImage = global::Drawing.Properties.Resources.pentagon;
+            this.btn_pentagon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_pentagon.Location = new System.Drawing.Point(3, 339);
             this.btn_pentagon.Name = "btn_pentagon";
             this.btn_pentagon.Size = new System.Drawing.Size(50, 50);
@@ -227,20 +241,11 @@ namespace Drawing
             this.btn_pentagon.UseVisualStyleBackColor = true;
             this.btn_pentagon.Click += new System.EventHandler(this.btn_pentagon_Click);
             // 
-            // btn_star
-            // 
-            this.btn_star.Location = new System.Drawing.Point(3, 395);
-            this.btn_star.Name = "btn_star";
-            this.btn_star.Size = new System.Drawing.Size(50, 50);
-            this.btn_star.TabIndex = 0;
-            this.btn_star.UseVisualStyleBackColor = true;
-            this.btn_star.Click += new System.EventHandler(this.btn_star_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 477);
             this.Controls.Add(this.canvas);
             this.Controls.Add(this.panel_style);
             this.Controls.Add(this.panel_shape);
