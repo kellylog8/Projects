@@ -9,6 +9,9 @@
 class Application
 {
 public:
+	Application();
+	~Application();
+
 	void Initialize();
 	void Run();
 
@@ -28,13 +31,14 @@ private:
 	MENU SelectMenu();
 	void SignUp();
 	void Login();
-
+	void Logout();
 
 private:
 	vector<Room> m_roomList;
 	vector<Movie> m_moveList;
 	vector<Member> m_memberList;
 
-	bool m_isLogin = false;
+	Member* m_member;	// login member
+	bool m_isLogin;
 };
 
