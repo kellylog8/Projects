@@ -144,12 +144,14 @@
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="Movie.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="TimeTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Member.h" />
     <ClInclude Include="Movie.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="TimeTable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

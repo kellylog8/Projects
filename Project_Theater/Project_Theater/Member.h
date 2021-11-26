@@ -24,7 +24,6 @@ public:
 		return true;
 	}
 
-
 public:
 	const string& GetID() { return m_id; }
 	const string& GetPW() { return m_pw; }

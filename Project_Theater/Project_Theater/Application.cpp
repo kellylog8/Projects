@@ -14,9 +14,10 @@ Application::~Application()
 
 void Application::Initialize()
 {
-	m_roomList.resize(2);
-	m_roomList[0].Initialize(5, 9, "M");
+	m_roomList.resize(3);
+	m_roomList[0].Initialize(10, 10, "M");
 	m_roomList[1].Initialize(6, 4, "1");
+	m_roomList[2].Initialize(5, 9, "2");
 
 	m_moveList.reserve(100);
 
@@ -34,6 +35,25 @@ void Application::Initialize()
 	Member member;
 	member.Initialize("qwe", "qwe", "ming jeong king", "010-1234-1234", "2000-12-24", "female");
 	m_memberList.push_back(member);
+
+
+
+
+
+	m_timeTable.Add("M", &m1, 9, 0);
+	m_timeTable.Add("M", &m2, 12, 20);
+	m_timeTable.Add("M", &m1, 19, 10);
+	m_timeTable.Add("M", &m1, 22, 0);
+
+	m_timeTable.Add("1", &m2, 8, 0);
+	m_timeTable.Add("1", &m3, 15, 30);
+	m_timeTable.Add("1", &m3, 18, 30);
+
+	m_timeTable.Add("2", &m3, 11, 30);
+	m_timeTable.Add("2", &m1, 18, 40);
+	m_timeTable.Add("2", &m2, 21, 30);
+	m_timeTable.Print();
+	system("pause");
 }
 
 	//cout << sizeof(int) << "bytes" << endl;
@@ -57,6 +77,15 @@ void Application::Run()
 			break;
 		case MENU::LOGOUT:
 			Logout();
+			break;
+		case MENU::RESERVE:
+			Reserve();
+			break;
+		case MENU::CHECK:
+			Check();
+			break;
+		case MENU::CANCLE:
+			Cancle();
 			break;
 		}
 
@@ -271,4 +300,20 @@ void Application::Logout()
 	m_member = nullptr;
 	m_isLogin = false;
 	cout << "로그아웃... \n";
+}
+
+void Application::Reserve()
+{
+	cout << "----------- 영화예매 -----------\n";
+}
+
+void Application::Check()
+{
+
+}
+
+void Application::Cancle()
+{
+
+
 }
