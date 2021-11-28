@@ -24,7 +24,10 @@ bool Member::Initialize(string id, string pw, string name, string phoneNumber, s
 
 	if (birthDate.empty() || birthDate.size() > 10)
 	{
-		cout << "생년월일을 잘못입력하셨습니다. YYYY-MM-DD 방식으로 입력해 주세요. \n";
+		cout << "\n";
+		cout << "*생년월일을 잘못입력하셨습니다. \n";
+		cout << " 다시입력해주세요. (YYYY-MM-DD) \n";
+		cout << "\n";
 		return false;
 	}
 
@@ -49,8 +52,8 @@ bool Member::Initialize(string id, string pw, string name, string phoneNumber, s
 
 	time_t timer;
 	struct tm t;
-	timer = time(NULL); // 현재 시각을 초 단위로 얻기
-	localtime_s(&t, &timer); // 초 단위의 시간을 분리하여 구조체에 넣기
+	timer = time(NULL);			// 현재 시각을 초 단위로 얻기
+	localtime_s(&t, &timer);	// 초 단위의 시간을 분리하여 구조체에 넣기
 
 	m_age = (t.tm_year + 1900) - year + 1;
 
@@ -64,7 +67,10 @@ bool Member::Initialize(string id, string pw, string name, string phoneNumber, s
 	}
 	else
 	{
-		cout << "성별을 잘못 입력하였습니다. \n";
+		cout << "\n";
+		cout << "*성별을 잘못입력하셨습니다. \n";
+		cout << " 다시입력해주세요. (male/man/1 or female/woman/2) \n";
+		cout << "\n";
 		return false;
 	}
 
@@ -73,11 +79,12 @@ bool Member::Initialize(string id, string pw, string name, string phoneNumber, s
 
 void Member::Print()
 {
-	cout << "----- 회원정보 \n";
-	cout << "이름 : " << m_name << endl;
-	cout << "핸드폰번호 : " << m_phoneNumber << endl;
-	cout << "나이 : " << m_age << endl;
-	cout << "생년월일 : " << m_year << "-" << m_month << "-" << m_day << endl;
+	cout << "\n";
+	cout << "< 회원정보 >\n";
+	cout << left << setw(10) << " 이름" << " : " << m_name << endl;
+	cout << left << setw(10) << " 핸드폰번호" << ": " << m_phoneNumber << endl;
+	cout << left << setw(10) << " 나이" << " : " << m_age << endl;
+	cout << left << setw(10) << " 생년월일" << " : " << m_year << "-" << m_month << "-" << m_day << endl;
 
 	string gender = " ";
 	if (m_gender == 1)
@@ -85,7 +92,7 @@ void Member::Print()
 	else if (m_gender == 2)
 		gender = "female;";
 
-	cout << "성별 : " << gender << endl;
+	cout << left << setw(10) << " 성별" << " : " << gender << endl;
 }
 
 bool Member::IsBirthdateForm(string birthday)
@@ -104,14 +111,20 @@ bool Member::IsBirthdateForm(string birthday)
 			int iMonth = stoi(month);
 			if (iMonth < 1 || iMonth > 12)
 			{
-				cout << "생년월일을 잘못입력하셨습니다. 1~12월 까지 입력해주세요.\n";
+				cout << "\n";
+				cout << "*생년월일을 잘못입력하셨습니다. \n";
+				cout << " 다시입력해주세요. (1~12월 사이) \n";
+				cout << "\n";
 				return false;
 			}
 			return true;
 		}
 	}
 
-	cout << "생년월일을 잘못입력하셨습니다. YYYY-MM-DD 방식으로 입력해 주세요. \n";
+	cout << "\n";
+	cout << "*생년월일을 잘못입력하셨습니다. \n";
+	cout << " 다시입력해주세요. (YYYY-MM-DD) \n";
+	cout << "\n";
 	return false;
 }
 
@@ -123,7 +136,10 @@ bool Member::IsGenderForm(string gender)
 	{
 		return true;
 	}
-	cout << "성별을 잘못입력하셨습니다. \n"
-		<< "다시입력해주세요.(male/man/1 or female/woman/2) \n";
+
+	cout << "\n";
+	cout << "*성별을 잘못입력하셨습니다. \n";
+	cout << " 다시입력해주세요. (male/man/1 or female/woman/2) \n";
+	cout << "\n";
 	return false;
 }

@@ -42,8 +42,9 @@ void TimeTable::Print()
 	{
 		string roomName = value.first;
 		auto movies = value.second;
-
+		
 		cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式\n";
+		cout << "\n";
 		cout << "[" << roomName << "婦] \n";
 		cout << endl;
 		for (int i = 0; i < movies.size(); i++)
@@ -54,7 +55,11 @@ void TimeTable::Print()
 			cout << " " << setw(2) << table.start_hour << ":" << setw(2) << table.start_min
 				 << "~" << setw(2) << table.end_hour << ":" << setw(2) << table.end_min << "\n";
 			cout << setfill(' ');
+			
 		}
+		cout << "\n";
+		cout << "================================\n";
 	}
+	
 	cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式\n";
 }

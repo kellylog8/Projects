@@ -53,7 +53,7 @@ void Application::Initialize()
 	m_timeTable.Add("2", &m1, 18, 40);
 	m_timeTable.Add("2", &m2, 21, 30);
 	m_timeTable.Print();
-	system("pause");
+	//system("pause");
 }
 
 	//cout << sizeof(int) << "bytes" << endl;
@@ -111,7 +111,9 @@ void Application::Run()
 Application::MENU Application::SelectMenu()
 {
 	cout << "\n\n";
-	cout << "----------M E N U---------- \n";
+	cout << "────────────────────────────\n";
+	cout << "         【 MENU 】          \n"; 
+	cout << "\n";
 
 	if (!m_isLogin)
 	{
@@ -127,12 +129,14 @@ Application::MENU Application::SelectMenu()
 		cout << "\n User : " << m_member->GetID() << "\n";
 		cout << "9. 로그아웃 \n";
 	}
+	cout << "----------------------------- \n";
 	cout << "0. 프로그램 종료 \n";
-	cout << "--------------------------- \n";
+	cout << "────────────────────────────\n";
 
 	int menuNum;
-	cout << "enter the menu => ";
+	cout << "▶ Enter the menu number : ";
 	cin >> menuNum;
+	cout << "\n";
 
 	MENU menu;
 	if (!m_isLogin)
@@ -180,7 +184,7 @@ Application::MENU Application::SelectMenu()
 
 void Application::SignUp()
 {
-	cout << "----------회원가입----------\n";
+	cout << "--------- 회원가입 ----------\n";
 
 	bool isSuccess = false;
 
@@ -198,7 +202,7 @@ void Application::SignUp()
 	while (isTrue)
 	{
 		isTrue = false;
-		cout << setw(10) << "ID" << " : ";
+		cout << setw(10) << " ID" << " : ";
 		cin >> id;
 		if (id == "q")
 		{
@@ -218,16 +222,16 @@ void Application::SignUp()
 	}
 	
 
-	cout << setw(10) << "PW" << " : ";
+	cout << setw(10) << " PW" << " : ";
 	cin >> pw;
-	cout << setw(10) << "이름" << " : ";
+	cout << setw(10) << " 이름" << " : ";
 	cin >> name;
-	cout << setw(10) << "핸드폰번호" << " : ";
+	cout << setw(10) << " 핸드폰번호" << ": ";
 	cin >> phoneNumber;
 
 	while (true)
 	{
-		cout << setw(10) << "생년월일" << " : ";
+		cout << setw(10) << " 생년월일" << " : ";
 		cin >> birthDate;
 
 		if (Member::IsBirthdateForm(birthDate))
@@ -238,7 +242,7 @@ void Application::SignUp()
 
 	while (true)
 	{
-		cout << setw(10) << "성별" << " : ";
+		cout << setw(10) << " 성별" << " : ";
 		cin >> gender;
 
 		if (Member::IsGenderForm(gender))
@@ -261,7 +265,7 @@ void Application::SignUp()
 
 void Application::Login()
 {
-	cout << "----------- 로그인 -----------\n";
+	cout << "---------- 로그인 -----------\n";
 
 	while (true)
 	{
