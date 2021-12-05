@@ -17,7 +17,7 @@ bool TimeTable::Add(string roomName, Movie* movie, int startHour, int startMin)
 	data.start_hour = startHour;
 	data.start_min = startMin;
 
-	int hour = floor(movie->GetRunningTime()/60);
+	int hour = static_cast<int>(floor(movie->GetRunningTime() / 60));
 	int min = movie->GetRunningTime() % 60;
 
 	// 상영시간이 중복되는 경우 예외처리 필요 if() return false

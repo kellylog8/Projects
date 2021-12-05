@@ -78,7 +78,7 @@ bool Member::Initialize(string id, string pw, string name, string phoneNumber, s
 void Member::Print()
 {
 	cout << "\n";
-	cout << "< 회원정보 > \n\n";
+	cout << "< 회원정보 > \n";
 	cout << left << setw(10) << " 이름" << " : " << m_name << endl;
 	cout << left << setw(10) << " 핸드폰번호" << ": " << m_phoneNumber << endl;
 	cout << left << setw(10) << " 나이" << " : " << m_age << endl;
@@ -88,7 +88,7 @@ void Member::Print()
 	if (m_gender == 1)
 		gender = "male";
 	else if (m_gender == 2)
-		gender = "female;";
+		gender = "female";
 
 	cout << left << setw(10) << " 성별" << " : " << gender << endl;
 }

@@ -8,7 +8,6 @@ Application::Application()
 
 Application::~Application()
 {
-	delete m_member;
 	m_member = nullptr;
 }
 
@@ -352,7 +351,27 @@ void Application::Reserve()
 		}
 	}
 
-	cout << room->GetName() << "관을 선택하셨습니다. \n\n";
+	cout << room->GetName() << "관을 선택하셨습니다. \n";
+	room->Print();
+
+	while (true)
+	{
+		int row, col;
+		cout << "\n";
+		cout << "원하는 좌석을 선택해주세요. (row / col) : ";
+		cin >> row >> col;
+
+		if (room->Reserve(row, col))
+		{
+			cout << "좌석을 예약합니다. \n";
+			break;
+		}
+		else
+		{
+			cout << "다시 선택해주세요. \n";
+		}
+	}
+
 	room->Print();
 }
 

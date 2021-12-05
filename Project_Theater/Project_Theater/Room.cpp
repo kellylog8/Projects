@@ -50,6 +50,7 @@ bool Room::Reserve(int row, int col)
 
 void Room::Print()
 {
+	cout << "\n";
 	cout << "¡¸ " << m_name << "°ü ¡¹\n\n";
 
 	for (int i = 0; i < m_seats.size(); i++)
