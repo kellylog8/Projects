@@ -309,11 +309,11 @@ void Application::Reserve()
 
 	m_timeTable.Print();
 
-	Movie movie;
+	Movie* movie = nullptr;
 
 	m_timeTable.SelectTable("M", 1, movie);
 
-	cout << movie.GetTitle();
+	cout << movie->GetTitle();
 	//cout << "¢º Please select movie : ";
 
 }
