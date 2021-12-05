@@ -6,6 +6,7 @@
 #include <map>
 #include <unordered_map>
 #include <iomanip>
+#include <sstream>
 using namespace std;
 
 #include "Movie.h"
@@ -25,7 +26,7 @@ public:
 	TimeTable();
 	
 	bool Add(string roomName, Movie* movie, int startHour, int startMin);
-	bool SelectTable(string roomName, int title_index, Movie*& movieInfo);
+	bool SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime);
 	void Print();
 
 private:

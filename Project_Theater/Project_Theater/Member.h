@@ -4,7 +4,11 @@
 #include <string>
 #include <chrono>
 #include <iomanip>
+#include <vector>
+#include <list>
 using namespace std;
+
+#include "Ticket.h"
 
 class Member
 {
@@ -29,6 +33,8 @@ public:
 	const string& GetID() { return m_id; }
 	const string& GetPW() { return m_pw; }
 
+	list<Ticket>& GetTickets() { return m_tickets; }
+
 private:
 	string m_id;	// key
 	string m_pw;
@@ -40,6 +46,9 @@ private:
 	int m_month;
 	int m_day;
 	int m_gender;
+
+	list<Ticket> m_tickets;
+
 
 
 };

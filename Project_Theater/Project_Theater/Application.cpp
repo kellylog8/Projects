@@ -316,6 +316,7 @@ void Application::Reserve()
 
 	Movie* movie = nullptr;
 	string roomName;
+	string reservedTime;
 
 	while (true)
 	{
@@ -328,7 +329,7 @@ void Application::Reserve()
 
 		std::transform(roomName.begin(), roomName.end(), roomName.begin(), ::toupper);
 
-		if (m_timeTable.SelectTable(roomName, title_index, movie))
+		if (m_timeTable.SelectTable(roomName, title_index, movie, reservedTime))
 		{
 			//cout << "선택한 영화 : " << movie->GetTitle() << "," << movie->GetPrice() << endl;
 			break;
@@ -354,9 +355,10 @@ void Application::Reserve()
 	cout << room->GetName() << "관을 선택하셨습니다. \n";
 	room->Print();
 
+	int row, col;
+
 	while (true)
 	{
-		int row, col;
 		cout << "\n";
 		cout << "원하는 좌석을 선택해주세요. (row / col) : ";
 		cin >> row >> col;
@@ -373,15 +375,52 @@ void Application::Reserve()
 	}
 
 	room->Print();
+
+	// ------------------------------------------
+
+	//string seatName = to_string(row) + to_string(col);
+	//아스키코드 참고
+	string seatName = Room::GetAlphabetName(row) + Room::GetColumeNum(col);
+
+	Ticket ticket;
+	ticket.Generate(roomName, seatName, movie->GetTitle(), reservedTime, 
+		movie->GetRunningTime(), movie->GetPrice());
+
+	m_member->GetTickets().push_back(ticket);
+
+	m_member->GetTickets().back().Print();
+
 }
 
 void Application::Check()
 {
+	cout << "----------- 예매확인 -----------\n";
+
+	//for (int i=0; i < m_member->GetTickets().size(); i++)
+	/*for (auto ticket : m_member->GetTickets())
+	{
+		cout << "\n";
+		ticket.Print();
+	}*/
+
+	/*for (int i = m_member->GetTickets().size() - 1; i >=0; i--)
+	{
+		cout << "\n";
+		m_member->GetTickets()[i].Print();
+	}*/
+
+	auto& tickets = m_member->GetTickets();
+	for (auto iter = tickets.begin(); iter != tickets.end(); iter++)
+	{
+		cout << "\n";
+		(*iter).ShowTicket();
+	}
+
 
 }
 
 void Application::Cancle()
 {
-
+	//cout << "----------- 예매취소 -----------\n";
 
 }

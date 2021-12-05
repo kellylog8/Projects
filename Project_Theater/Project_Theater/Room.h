@@ -18,6 +18,9 @@ public:
 	bool Reserve(int row, int col);
 	void Print();
 
+	static string GetAlphabetName(int row);
+	static string GetColumeNum(int col);
+
 private:
 	string m_name;
 	vector<vector<int>> m_seats;

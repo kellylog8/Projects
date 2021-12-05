@@ -60,13 +60,17 @@ void Room::Print()
 			cout << setw(4) << " ";
 			for (int j = 0; j < m_seats[i].size(); j++)
 			{
-				string colStr = "C" + to_string(j);
+				//string rowStr = "C" + to_string(j);
+				//string colStr = to_string(j+1);
+				string colStr = GetColumeNum(j);
 				cout << setw(2) << colStr << " ";
 			}
 			cout << endl;
 		}
 
-		string rowStr = "R" + to_string(i);
+		//string rowStr = "R" + to_string(i);
+		string rowStr = GetAlphabetName(i);
+
 		cout << setw(3) << rowStr << " ";
 
 		for (int j = 0; j < m_seats[i].size(); j++)
@@ -83,4 +87,19 @@ void Room::Print()
 
 	}
 
+}
+
+string Room::GetAlphabetName(int row)
+{
+	//아스키코드 참고
+	char alphabet = 'A' + row;
+	string str;
+	str += alphabet;
+
+	return str;
+}
+
+string Room::GetColumeNum(int col)
+{
+	return to_string(col + 1);
 }

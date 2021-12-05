@@ -36,7 +36,7 @@ bool TimeTable::Add(string roomName, Movie* movie, int startHour, int startMin)
 	return true;
 }
 
-bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo)
+bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime)
 {
 	vector<TimeTableType>& table = m_tableList[roomName];
 	if (table.empty())
@@ -54,6 +54,13 @@ bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo)
 		}
 
 		movieInfo = table[title_index].movie;
+
+		auto& time = table[title_index];
+		stringstream ss;
+		ss << time.start_hour << ":" << time.start_min << " ~ "
+			<< time.end_hour << ":" << time.end_min;
+
+		selectedTime = ss.str();
 
 		return true;
 	}
