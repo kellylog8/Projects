@@ -41,5 +41,6 @@ private:
 	int m_day;
 	int m_gender;
 
+
 };
 

@@ -50,8 +50,12 @@ void Application::Initialize()
 	m_timeTable.Add("2", &m_movieList[2], 11, 30);
 	m_timeTable.Add("2", &m_movieList[0], 18, 40);
 	m_timeTable.Add("2", &m_movieList[1], 21, 30);
-	m_timeTable.Print();
+
+
+
+	//m_roomList[2].Print();
 	//system("pause");
+
 }
 
 	//cout << sizeof(int) << "bytes" << endl;
@@ -169,6 +173,7 @@ Application::MENU Application::SelectMenu()
 			break;
 		case 9:
 			menu = MENU::LOGOUT;
+			break;
 		case 0:
 			menu = MENU::EXIT;
 			break;
@@ -301,6 +306,7 @@ void Application::Logout()
 	m_member = nullptr;
 	m_isLogin = false;
 	cout << "로그아웃... \n";
+	cout << "첫화면으로 돌아갑니다. \n";
 }
 
 void Application::Reserve()
@@ -310,12 +316,44 @@ void Application::Reserve()
 	m_timeTable.Print();
 
 	Movie* movie = nullptr;
+	string roomName;
 
-	m_timeTable.SelectTable("M", 1, movie);
+	while (true)
+	{
+		int title_index;
 
-	cout << movie->GetTitle();
-	//cout << "▶ Please select movie : ";
+		cout << "\n";
+		cout << "▶ Please select movie \n";
+		cout << "   (RoomName / TitleIndex) : ";
+		cin >> roomName >> title_index;
 
+		std::transform(roomName.begin(), roomName.end(), roomName.begin(), ::toupper);
+
+		if (m_timeTable.SelectTable(roomName, title_index, movie))
+		{
+			//cout << "선택한 영화 : " << movie->GetTitle() << "," << movie->GetPrice() << endl;
+			break;
+		}
+		else
+		{
+			cout << "잘못 입력하셨습니다. 다시 입력해주세요. \n";
+		}
+		
+	}
+
+	Room* room = nullptr;
+
+	for (Room& roomRef : m_roomList)
+	{
+		if (roomRef.GetName() == roomName)
+		{
+			room = &roomRef;
+			break;
+		}
+	}
+
+	cout << room->GetName() << "관을 선택하셨습니다. \n\n";
+	room->Print();
 }
 
 void Application::Check()

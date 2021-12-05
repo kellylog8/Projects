@@ -28,5 +28,7 @@ private:
 	int m_price;			// АЁАн
 
 	static int m_count;
+
+
 };
 

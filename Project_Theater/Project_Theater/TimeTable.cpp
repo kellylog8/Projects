@@ -58,7 +58,6 @@ bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo)
 		return true;
 	}
 
-	cout << "พ๘ดย. \n";
 	return false;
 }
 

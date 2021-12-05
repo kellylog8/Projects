@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iomanip>
+#include <algorithm>
 
 #include "Room.h"
 #include "Movie.h"
@@ -46,5 +47,7 @@ private:
 
 	Member* m_member;	// login member
 	bool m_isLogin;
+
+
 };
 

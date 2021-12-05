@@ -45,18 +45,41 @@ bool Room::Reserve(int row, int col)
 	m_seats[row][col] = 1;
 	cout << "예약 성공! \n";
 	return true;
+
 }
 
 void Room::Print()
 {
-	cout << "--- " << m_name << "관" << endl;
+	cout << "「 " << m_name << "관 」\n\n";
 
 	for (int i = 0; i < m_seats.size(); i++)
 	{
+		if (i == 0)
+		{
+			cout << setw(4) << " ";
+			for (int j = 0; j < m_seats[i].size(); j++)
+			{
+				string colStr = "C" + to_string(j);
+				cout << setw(2) << colStr << " ";
+			}
+			cout << endl;
+		}
+
+		string rowStr = "R" + to_string(i);
+		cout << setw(3) << rowStr << " ";
+
 		for (int j = 0; j < m_seats[i].size(); j++)
 		{
-			cout << m_seats[i][j] << " ";
+			string seat = "□";
+			if (m_seats[i][j] == 1)
+			{
+				seat = "■";
+			}
+			cout << seat << " ";
 		}
+
 		cout << endl;
+
 	}
+
 }

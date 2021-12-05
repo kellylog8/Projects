@@ -78,7 +78,7 @@ bool Member::Initialize(string id, string pw, string name, string phoneNumber, s
 void Member::Print()
 {
 	cout << "\n";
-	cout << "< 회원정보 >\n";
+	cout << "< 회원정보 > \n\n";
 	cout << left << setw(10) << " 이름" << " : " << m_name << endl;
 	cout << left << setw(10) << " 핸드폰번호" << ": " << m_phoneNumber << endl;
 	cout << left << setw(10) << " 나이" << " : " << m_age << endl;
