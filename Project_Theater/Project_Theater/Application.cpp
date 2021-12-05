@@ -19,15 +19,15 @@ void Application::Initialize()
 	m_roomList[1].Initialize(6, 4, "1");
 	m_roomList[2].Initialize(5, 9, "2");
 
-	m_moveList.reserve(100);
+	m_movieList.reserve(100);
 
 	Movie m1 ("Dune", "2021-10-20", 155, 12000);
 	Movie m2 ("Avatar2", "2022-12-16", 230, 15000);
 	Movie m3 ("Star Wars", "2021-11-13", 141, 9000);
 
-	m_moveList.push_back(m1);
-	m_moveList.push_back(m2);
-	m_moveList.push_back(m3);
+	m_movieList.push_back(m1);
+	m_movieList.push_back(m2);
+	m_movieList.push_back(m3);
 
 
 
@@ -38,20 +38,18 @@ void Application::Initialize()
 
 
 
+	m_timeTable.Add("M", &m_movieList[0], 9, 0);
+	m_timeTable.Add("M", &m_movieList[1], 12, 20);
+	m_timeTable.Add("M", &m_movieList[0], 19, 10);
+	m_timeTable.Add("M", &m_movieList[0], 22, 0);
 
+	m_timeTable.Add("1", &m_movieList[1], 8, 0);
+	m_timeTable.Add("1", &m_movieList[2], 15, 30);
+	m_timeTable.Add("1", &m_movieList[2], 18, 30);
 
-	m_timeTable.Add("M", &m1, 9, 0);
-	m_timeTable.Add("M", &m2, 12, 20);
-	m_timeTable.Add("M", &m1, 19, 10);
-	m_timeTable.Add("M", &m1, 22, 0);
-
-	m_timeTable.Add("1", &m2, 8, 0);
-	m_timeTable.Add("1", &m3, 15, 30);
-	m_timeTable.Add("1", &m3, 18, 30);
-
-	m_timeTable.Add("2", &m3, 11, 30);
-	m_timeTable.Add("2", &m1, 18, 40);
-	m_timeTable.Add("2", &m2, 21, 30);
+	m_timeTable.Add("2", &m_movieList[2], 11, 30);
+	m_timeTable.Add("2", &m_movieList[0], 18, 40);
+	m_timeTable.Add("2", &m_movieList[1], 21, 30);
 	m_timeTable.Print();
 	//system("pause");
 }
@@ -295,7 +293,6 @@ void Application::Login()
 
 		cout << "다시 로그인해주세요. 로그인을 종료하시려면 q를 입력해주세요. \n";
 	}
-	
 
 }
 
@@ -309,6 +306,16 @@ void Application::Logout()
 void Application::Reserve()
 {
 	cout << "----------- 영화예매 -----------\n";
+
+	m_timeTable.Print();
+
+	Movie movie;
+
+	m_timeTable.SelectTable("M", 1, movie);
+
+	cout << movie.GetTitle();
+	//cout << "▶ Please select movie : ";
+
 }
 
 void Application::Check()

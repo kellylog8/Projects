@@ -39,7 +39,7 @@ private:
 
 private:
 	vector<Room> m_roomList;
-	vector<Movie> m_moveList;
+	vector<Movie> m_movieList;
 	vector<Member> m_memberList;
 
 	TimeTable m_timeTable;

@@ -36,6 +36,32 @@ bool TimeTable::Add(string roomName, Movie* movie, int startHour, int startMin)
 	return true;
 }
 
+bool TimeTable::SelectTable(string roomName, int title_index, Movie& movieInfo)
+{
+	vector<TimeTableType>& table = m_tableList[roomName];
+	if (table.empty())
+	{
+		cout << "없는 상영관입니다. \n";
+		return false;
+	}
+
+	if (title_index >= 0 && title_index < table.size())
+	{
+		if (table[title_index].movie == nullptr)
+		{
+			cout << "영화정보가 없습니다. \n";
+			return false;
+		}
+
+		movieInfo = *(table[title_index].movie);
+
+		return true;
+	}
+
+	cout << "없는. \n";
+	return false;
+}
+
 void TimeTable::Print()
 {
 	for (auto value : m_tableList)

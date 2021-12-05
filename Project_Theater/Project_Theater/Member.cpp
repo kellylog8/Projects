@@ -35,8 +35,6 @@ bool Member::Initialize(string id, string pw, string name, string phoneNumber, s
 
 	int year = stoi(birthDate.substr(0, 4));
 
-	birthDate.find('-');
-
 	int month = stoi(birthDate.substr(5, 2));
 	int day = stoi(birthDate.substr(8, 2));
 

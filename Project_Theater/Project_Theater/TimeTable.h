@@ -25,18 +25,12 @@ public:
 	TimeTable();
 	
 	bool Add(string roomName, Movie* movie, int startHour, int startMin);
+	bool SelectTable(string roomName, int title_index, Movie& movieInfo);
 	void Print();
 
 private:
 	unordered_map<string, vector<TimeTableType>> m_tableList;
 
-
-
-	/*
-	M°ü : 09:00~13:00 movie1 | 19:00~23:00 movie1
-	1°ü : 10:00~12:30 movie2 | 17:30~20:00 movie3
-	2°ü : 11:00~13:30 movie3 | 21:00~23:30 movie2
-	*/
 
 };
 
