@@ -28,7 +28,6 @@ void Ticket::Print()
 
 void Ticket::ShowTicket()
 {
-	//setfill(' ')
 	cout << "\n";
 	cout << "忙式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式忖\n";
 	cout << "弛" << setw(37) << "弛\n";
@@ -37,9 +36,9 @@ void Ticket::ShowTicket()
 	cout << "弛" << setw(33) << "===============================" << setw(4) << "弛\n";
 	cout << "弛" << setw(37) << "弛\n";
 	cout << "弛" << setw(20) << m_title << setw(17) << "弛\n";
-	cout << "弛" << setw(20) << m_room << "婦 " << m_seat << setw(12) << "弛\n";
+	cout << "弛" << setw(20) << m_room << "婦 " <<setw(3) << left << m_seat << right << setw(11) << "弛\n";
 	cout << "弛" << setw(22) << m_time << " (" << m_runningTime << "碟)" << setw(7) << "弛\n";
-	cout << "弛" << setw(21) << m_price << "錳 (識 1貲)" << setw(5) << "弛\n";
+	cout << "弛" << setw(20) << m_price << "錳 (識 1貲)" << setw(6) << "弛\n";
 	cout << "弛" << setw(37) << "弛\n";
 	cout << "弛" << setw(37) << "弛\n";
 	cout << "弛" << setw(37) << "弛\n";
