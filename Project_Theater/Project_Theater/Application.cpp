@@ -37,18 +37,18 @@ void Application::Initialize()
 
 
 
-	m_timeTable.Add("M", &m_movieList[0], 9, 0);
-	m_timeTable.Add("M", &m_movieList[1], 12, 20);
-	m_timeTable.Add("M", &m_movieList[0], 19, 10);
-	m_timeTable.Add("M", &m_movieList[0], 22, 0);
+	m_timeTable.Add(m_roomList[0], &m_movieList[0], 9, 0);
+	m_timeTable.Add(m_roomList[0], &m_movieList[1], 12, 20);
+	m_timeTable.Add(m_roomList[0], &m_movieList[0], 19, 10);
+	m_timeTable.Add(m_roomList[0], &m_movieList[0], 22, 0);
 
-	m_timeTable.Add("1", &m_movieList[1], 8, 0);
-	m_timeTable.Add("1", &m_movieList[2], 15, 30);
-	m_timeTable.Add("1", &m_movieList[2], 18, 30);
+	m_timeTable.Add(m_roomList[1], &m_movieList[1], 8, 0);
+	m_timeTable.Add(m_roomList[1], &m_movieList[2], 15, 30);
+	m_timeTable.Add(m_roomList[1], &m_movieList[2], 18, 30);
 
-	m_timeTable.Add("2", &m_movieList[2], 11, 30);
-	m_timeTable.Add("2", &m_movieList[0], 18, 40);
-	m_timeTable.Add("2", &m_movieList[1], 21, 30);
+	m_timeTable.Add(m_roomList[2], &m_movieList[2], 11, 30);
+	m_timeTable.Add(m_roomList[2], &m_movieList[0], 18, 40);
+	m_timeTable.Add(m_roomList[2], &m_movieList[1], 21, 30);
 
 
 
@@ -300,7 +300,7 @@ void Application::Logout()
 	m_member = nullptr;
 	m_isLogin = false;
 	cout << "로그아웃... \n";
-	cout << "첫화면으로 돌아갑니다. \n";
+	cout << "메인 화면으로 돌아갑니다. \n";
 }
 
 void Application::Reserve()
@@ -312,6 +312,7 @@ void Application::Reserve()
 	Movie* movie = nullptr;
 	string roomName;
 	string reservedTime;
+	Room* room = nullptr;
 
 	while (true)
 	{
@@ -324,7 +325,7 @@ void Application::Reserve()
 
 		std::transform(roomName.begin(), roomName.end(), roomName.begin(), ::toupper);
 
-		if (m_timeTable.SelectTable(roomName, title_index, movie, reservedTime))
+		if (m_timeTable.SelectTable(roomName, title_index, movie, reservedTime, room))
 		{
 			//cout << "선택한 영화 : " << movie->GetTitle() << "," << movie->GetPrice() << endl;
 			break;
@@ -336,7 +337,7 @@ void Application::Reserve()
 		
 	}
 
-	Room* room = nullptr;
+	/*Room* room = nullptr;
 
 	for (Room& roomRef : m_roomList)
 	{
@@ -345,7 +346,7 @@ void Application::Reserve()
 			room = &roomRef;
 			break;
 		}
-	}
+	}*/
 
 	cout << room->GetName() << "관을 선택하셨습니다. \n";
 	room->Print();

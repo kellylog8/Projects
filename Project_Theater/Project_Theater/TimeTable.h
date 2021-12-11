@@ -10,6 +10,7 @@
 using namespace std;
 
 #include "Movie.h"
+#include "Room.h"
 
 struct TimeTableType
 {
@@ -18,6 +19,7 @@ struct TimeTableType
 	int end_hour;
 	int end_min;
 	Movie* movie;
+	Room room;
 };
 
 class TimeTable
@@ -25,8 +27,8 @@ class TimeTable
 public:
 	TimeTable();
 	
-	bool Add(string roomName, Movie* movie, int startHour, int startMin);
-	bool SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime);
+	bool Add(Room room, Movie* movie, int startHour, int startMin);
+	bool SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime, Room*& room);
 	void Print();
 
 private:

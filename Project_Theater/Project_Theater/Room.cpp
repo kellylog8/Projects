@@ -10,6 +10,14 @@ Room::~Room()
 {
 }
 
+bool Room::IsInitialized()
+{
+	if (m_name.empty() || m_seats.size() == 0)
+		return false;
+
+	return true;
+}
+
 void Room::Initialize(int row, int col, string name)
 {
 	m_name = name;

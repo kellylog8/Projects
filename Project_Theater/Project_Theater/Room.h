@@ -12,6 +12,7 @@ public:
 	Room();
 	~Room();
 
+	bool IsInitialized();
 	void Initialize(int row, int col, string name);
 	const string& GetName() { return m_name; }
 	int GetSeatValue();

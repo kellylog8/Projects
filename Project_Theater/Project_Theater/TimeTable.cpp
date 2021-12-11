@@ -5,14 +5,16 @@ TimeTable::TimeTable()
 	m_tableList["M"] = {  };
 }
 
-bool TimeTable::Add(string roomName, Movie* movie, int startHour, int startMin)
+//bool TimeTable::Add(string roomName, Movie* movie, int startHour, int startMin)
+bool TimeTable::Add(Room room, Movie* movie, int startHour, int startMin)
 {
-	if (roomName.empty() || movie == nullptr || startHour < 0 || startMin < 0)
+	if (!room.IsInitialized() || movie == nullptr || startHour < 0 || startMin < 0)
 	{
 		return false;
 	}
 
 	TimeTableType data;
+	data.room = room;
 	data.movie = movie;
 	data.start_hour = startHour;
 	data.start_min = startMin;
@@ -31,12 +33,12 @@ bool TimeTable::Add(string roomName, Movie* movie, int startHour, int startMin)
 	data.end_hour = startHour + hour;
 	data.end_min = startMin + min;
 
-	m_tableList[roomName].push_back(data);
+	m_tableList[room.GetName()].push_back(data);
 
 	return true;
 }
 
-bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime)
+bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime, Room*& room)
 {
 	vector<TimeTableType>& table = m_tableList[roomName];
 	if (table.empty())
@@ -54,6 +56,7 @@ bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo,
 		}
 
 		movieInfo = table[title_index].movie;
+		room = &(table[title_index].room);
 
 		auto& time = table[title_index];
 		stringstream ss;
