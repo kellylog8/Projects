@@ -106,6 +106,13 @@ void Application::Run()
 		case MENU::MOVIE_REMOVE:
 			RemoveMovie();
 			break;
+
+		case MENU::SCHEDULE_INSERT:
+			InsertSchedule();
+			break;
+		case MENU::SCHEDULE_REMOVE:
+			RemoveSchedule();
+			break;
 		}
 
 		if (menu == MENU::EXIT)
@@ -148,6 +155,8 @@ Application::MENU Application::SelectMenu()
 			cout << "3. 영화 추가 \n";
 			cout << "4. 영화 수정\n";
 			cout << "5. 영화 삭제\n";
+			cout << "6. 상영시간표 추가\n";
+			cout << "7. 상영시간표 삭제\n";
 		}
 		else
 		{
@@ -155,7 +164,7 @@ Application::MENU Application::SelectMenu()
 			cout << "2. 예매 확인하기 \n";
 		}
 
-		cout << "\n User ID : " << m_member->GetID() << "\n";
+		cout << "\n >> User ID : " << m_member->GetID() << "\n";
 		cout << "9. 로그아웃 \n";
 	}
 	cout << "----------------------------- \n";
@@ -206,6 +215,12 @@ Application::MENU Application::SelectMenu()
 				break;
 			case 5:
 				menu = MENU::MOVIE_REMOVE;
+				break;
+			case 6:
+				menu = MENU::SCHEDULE_INSERT;
+				break;
+			case 7:
+				menu = MENU::SCHEDULE_REMOVE;
 				break;
 
 			case 9:
@@ -675,6 +690,7 @@ void Application::InsertMovie()
 
 	ShowAllMovies();
 
+	cout << "\n";
 	cout << "title : ";
 	cin >> title;
 	cout << "releasedDate : ";
@@ -705,6 +721,7 @@ void Application::ModifyMovie()
 	ShowAllMovies();
 
 	int movieNum;
+	cout << "\n";
 	cout << "select movie num : ";
 	cin >> movieNum;
 
@@ -741,6 +758,7 @@ void Application::RemoveMovie()
 	ShowAllMovies();
 
 	int movieNum;
+	cout << "\n";
 	cout << "select movie num : ";
 	cin >> movieNum;
 
@@ -763,6 +781,104 @@ void Application::RemoveMovie()
 	}
 
 	ShowAllMovies();
+
+}
+
+void Application::InsertSchedule()
+{
+	cout << "\n";
+	cout << "--------- Insert Schedule ----------\n";
+
+	m_timeTable.Print();
+
+	cout << " >> room \n";
+	for (int i = 0; i < m_roomList.size(); i++)
+	{
+		cout << setw(2) << i << "번   " << m_roomList[i].GetName() <<"관" << "\n";
+	}
+	cout << " >> movie \n";
+	for (int i = 0; i < m_movieList.size(); i++)
+	{
+		cout << setw(2) << i << "번   " << m_movieList[i].GetTitle() << "\n";
+	}
+
+	while (true)
+	{
+		int roomNum;
+		int movieNum;
+		int hour, min;
+
+		cout << "\n";
+		cout << "room number / movie number : ";
+		cin >> roomNum >> movieNum;
+		cout << "start hour / min : ";
+		cin >> hour >> min;
+		cout << "\n";
+
+		if (roomNum < 0 || roomNum >= m_roomList.size())
+		{
+			cout << "fail to enter the room number \n";
+			continue;
+		}
+		if (movieNum < 0 || movieNum >= m_movieList.size())
+		{
+			cout << "fail to enter the movie number \n";
+			continue;
+		}
+
+		if (!m_timeTable.Add(m_roomList[roomNum], &m_movieList[movieNum], hour, min))
+		{
+			cout << "fail to insert time-table \n";
+			continue;
+		}
+		else
+		{
+			m_timeTable.Print();
+			break;
+		}
+
+		cout << "\n";
+
+	}
+	
+
+}
+
+void Application::RemoveSchedule()
+{
+	cout << "\n";
+	cout << "--------- Remove Schedule ----------\n";
+
+	m_timeTable.Print();
+
+	while (true)
+	{
+		string roomName;
+		int tableOrder;
+
+		cout << "\n";
+		cout << "roomName : ";
+		cin >> roomName;
+		if (roomName == "q")
+		{
+			return;
+		}
+		cout << "tableOrder : ";
+		cin >> tableOrder;
+		cout << "\n";
+
+		if (!m_timeTable.Remove(roomName, tableOrder))
+		{
+			cout << "fail to remove schedule \n";
+			continue;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	m_timeTable.Print();
 
 }
 

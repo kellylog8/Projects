@@ -38,6 +38,30 @@ bool TimeTable::Add(Room room, Movie* movie, int startHour, int startMin)
 	return true;
 }
 
+bool TimeTable::Remove(string roomName, int tableOrder)
+{
+	if (m_tableList.find(roomName) != m_tableList.end())
+	{
+		auto& tables = m_tableList[roomName];
+
+		if (tableOrder >= 0 && tableOrder < tables.size())
+		{
+			auto iter = tables.begin();
+			for (int i = 0; i < tableOrder; i++)
+			{
+				iter++;
+			}
+
+			tables.erase(iter);
+			return true;
+		}
+
+	}
+
+	return false;
+
+}
+
 bool TimeTable::SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime, Room*& room)
 {
 	vector<TimeTableType>& table = m_tableList[roomName];

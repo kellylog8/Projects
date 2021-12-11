@@ -35,7 +35,6 @@ private:
 		MOVIE_MODIFY,
 		MOVIE_REMOVE,
 		SCHEDULE_INSERT,
-		SCHEDULE_MODIFY,
 		SCHEDULE_REMOVE,
 	};
 
@@ -54,6 +53,9 @@ private:
 	void InsertMovie();
 	void ModifyMovie();
 	void RemoveMovie();
+
+	void InsertSchedule();
+	void RemoveSchedule();
 
 private:
 	vector<Room> m_roomList;

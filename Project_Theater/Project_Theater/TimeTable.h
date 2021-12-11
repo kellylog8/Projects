@@ -28,6 +28,7 @@ public:
 	TimeTable();
 	
 	bool Add(Room room, Movie* movie, int startHour, int startMin);
+	bool Remove(string roomName, int tableOrder);
 	bool SelectTable(string roomName, int title_index, Movie*& movieInfo, string& selectedTime, Room*& room);
 	void Print();
 
