@@ -85,9 +85,6 @@ void Application::Run()
 		case MENU::CHECK:
 			Check();
 			break;
-		case MENU::CANCLE:
-			Cancle();
-			break;
 		}
 
 		if (menu == MENU::EXIT)
@@ -125,7 +122,6 @@ Application::MENU Application::SelectMenu()
 	{
 		cout << "1. 예매하기 \n";
 		cout << "2. 예매 확인하기 \n";
-		cout << "3. 예매 취소하기 \n";
 
 		cout << "\n User : " << m_member->GetID() << "\n";
 		cout << "9. 로그아웃 \n";
@@ -166,9 +162,6 @@ Application::MENU Application::SelectMenu()
 			break;
 		case 2:
 			menu = MENU::CHECK;
-			break;
-		case 3:
-			menu = MENU::CANCLE;
 			break;
 		case 9:
 			menu = MENU::LOGOUT;
@@ -418,11 +411,73 @@ void Application::Check()
 		(*iter).ShowTicket();
 	}
 
+	while (true)
+	{
+		if (tickets.size() <= 0)
+		{
+			cout << "예매내역이 없습니다. \n";
+			cout << "메뉴 화면으로 돌아갑니다. \n";
+			return;
+		}
+
+		cout << "\n";
+		cout << "계속 진행하려면 1번을 \n";
+		cout << "예매를 취소하시려면 2번을 입력해주세요. \n";
+
+		int menuNum;
+		cout << "▶ Enter the menu number : ";
+		cin >> menuNum;
+
+		if (menuNum == 1)
+			break;
+		else if (menuNum == 2)
+		{
+			cout << "\n";
+			cout << "예매취소 메뉴를 선택하셨습니다. \n";
+			cout << "취소할 티켓의 번호를 입력해주세요. \n";
+
+			while (true)
+			{
+				int reserveID;
+				cout << "reserved id : ";
+				cin >> reserveID;
+				
+				if (reserveID >= 0 && reserveID < tickets.size())
+				{
+					auto iter = tickets.begin();
+
+					for (int i = 0; i < reserveID; i++)
+					{
+						iter++;
+					}
+
+					// 예매취소 진행
+					tickets.erase(iter);
+
+					system("cls");
+
+					cout << "\n";
+					cout << "예매취소 성공! \n";
+					cout << "현재 예매한 티켓은 " << tickets.size() << "장 입니다. \n";
+
+					for (auto iter = tickets.begin(); iter != tickets.end(); iter++)
+					{
+						cout << "\n";
+						(*iter).ShowTicket();
+					}
+
+					break;
+				}
+
+				cout << "\n";
+				cout << "예약번호를 잘못입력하셨습니다. 다시 입력해주세요. \n";
+			}
+			
+		}
+
+
+	}
+
 
 }
 
-void Application::Cancle()
-{
-	//cout << "----------- 예매취소 -----------\n";
-
-}

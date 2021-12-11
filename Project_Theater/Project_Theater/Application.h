@@ -36,7 +36,6 @@ private:
 	void Logout();
 	void Reserve();
 	void Check();
-	void Cancle();
 
 private:
 	vector<Room> m_roomList;
