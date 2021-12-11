@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 class Ticket
@@ -10,6 +11,7 @@ public:
 	void Generate(string room, string seat, string title, string time, int runningTime, int price);
 	void Print();
 	void ShowTicket();
+	void PrintTicket();
 
 private:
 	string m_room;

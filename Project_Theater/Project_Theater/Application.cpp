@@ -29,8 +29,13 @@ void Application::Initialize()
 	m_movieList.push_back(m3);
 
 
+	// Admin
+	Member memberAdmin;
+	memberAdmin.Initialize("admin", "123", "manager", "010-0000-0000", "2000-01-01", "male");
+	m_memberList.push_back(memberAdmin);
 
-	// 테스트용 멤버
+
+	// User (테스트용 멤버)
 	Member member;
 	member.Initialize("qwe", "qwe", "ming jeong king", "010-1234-1234", "2000-12-24", "female");
 	m_memberList.push_back(member);
@@ -85,6 +90,22 @@ void Application::Run()
 		case MENU::CHECK:
 			Check();
 			break;
+
+		case MENU::ROOM_INSERT:
+			InsertRoom();
+			break;
+		case MENU::ROOM_REMOVE:
+			RemoveRoom();
+			break;
+		case MENU::MOVIE_INSERT:
+			InsertMovie();
+			break;
+		case MENU::MOVIE_MODIFY:
+			ModifyMovie();
+			break;
+		case MENU::MOVIE_REMOVE:
+			RemoveMovie();
+			break;
 		}
 
 		if (menu == MENU::EXIT)
@@ -120,10 +141,21 @@ Application::MENU Application::SelectMenu()
 	}
 	else
 	{
-		cout << "1. 예매하기 \n";
-		cout << "2. 예매 확인하기 \n";
+		if (m_isAdmin)
+		{
+			cout << "1. 상영관 추가 \n";
+			cout << "2. 상영관 삭제 \n";
+			cout << "3. 영화 추가 \n";
+			cout << "4. 영화 수정\n";
+			cout << "5. 영화 삭제\n";
+		}
+		else
+		{
+			cout << "1. 예매하기 \n";
+			cout << "2. 예매 확인하기 \n";
+		}
 
-		cout << "\n User : " << m_member->GetID() << "\n";
+		cout << "\n User ID : " << m_member->GetID() << "\n";
 		cout << "9. 로그아웃 \n";
 	}
 	cout << "----------------------------- \n";
@@ -146,6 +178,7 @@ Application::MENU Application::SelectMenu()
 		case 2:
 			menu = MENU::LOGIN;
 			break;
+
 		case 0:
 			menu = MENU::EXIT;
 			break;
@@ -155,23 +188,58 @@ Application::MENU Application::SelectMenu()
 	}
 	else
 	{
-		switch (menuNum)
+		if (m_isAdmin)
 		{
-		case 1:
-			menu = MENU::RESERVE;
-			break;
-		case 2:
-			menu = MENU::CHECK;
-			break;
-		case 9:
-			menu = MENU::LOGOUT;
-			break;
-		case 0:
-			menu = MENU::EXIT;
-			break;
-		default:
-			menu = MENU::NONE;
+			switch (menuNum)
+			{
+			case 1:
+				menu = MENU::ROOM_INSERT;
+				break;
+			case 2:
+				menu = MENU::ROOM_REMOVE;
+				break;
+			case 3:
+				menu = MENU::MOVIE_INSERT;
+				break;
+			case 4:
+				menu = MENU::MOVIE_MODIFY;
+				break;
+			case 5:
+				menu = MENU::MOVIE_REMOVE;
+				break;
+
+			case 9:
+				menu = MENU::LOGOUT;
+				break;
+			case 0:
+				menu = MENU::EXIT;
+				break;
+			default:
+				menu = MENU::NONE;
+			}
 		}
+		else
+		{
+			switch (menuNum)
+			{
+			case 1:
+				menu = MENU::RESERVE;
+				break;
+			case 2:
+				menu = MENU::CHECK;
+				break;
+
+			case 9:
+				menu = MENU::LOGOUT;
+				break;
+			case 0:
+				menu = MENU::EXIT;
+				break;
+			default:
+				menu = MENU::NONE;
+			}
+		}
+		
 	}
 	
 	return menu;
@@ -284,6 +352,10 @@ void Application::Login()
 				m_member = &member;
 				m_isLogin = true;
 				cout << "로그인 성공! \n";
+				if (id == "admin")
+				{
+					m_isAdmin = true;
+				}
 				return;
 			}
 		}
@@ -299,6 +371,7 @@ void Application::Logout()
 {
 	m_member = nullptr;
 	m_isLogin = false;
+	m_isAdmin = false;
 	cout << "로그아웃... \n";
 	cout << "메인 화면으로 돌아갑니다. \n";
 }
@@ -422,8 +495,9 @@ void Application::Check()
 		}
 
 		cout << "\n";
-		cout << "계속 진행하려면 1번을 \n";
-		cout << "예매를 취소하시려면 2번을 입력해주세요. \n";
+		cout << "계속 진행하려면 1번 \n";
+		cout << "예매를 취소하시려면 2번 \n";
+		cout << "Ticket을 출력하시려면 3번을 입력해주세요. \n";
 
 		int menuNum;
 		cout << "▶ Enter the menu number : ";
@@ -440,7 +514,7 @@ void Application::Check()
 			while (true)
 			{
 				int reserveID;
-				cout << "reserved id : ";
+				cout << "reserved ticket num : ";
 				cin >> reserveID;
 				
 				if (reserveID >= 0 && reserveID < tickets.size())
@@ -459,7 +533,7 @@ void Application::Check()
 
 					cout << "\n";
 					cout << "예매취소 성공! \n";
-					cout << "현재 예매한 티켓은 " << tickets.size() << "장 입니다. \n";
+					cout << "현재 예매한 티켓은 " << tickets.size() << "매 입니다. \n";
 
 					for (auto iter = tickets.begin(); iter != tickets.end(); iter++)
 					{
@@ -476,9 +550,219 @@ void Application::Check()
 			
 		}
 
+		else if (menuNum == 3)
+		{
+			int ticketNum;
+
+			cout << "\n";
+			cout << "Ticket출력 메뉴를 선택하셨습니다. \n";
+			cout << "출력할 Ticket을 선택해주세요 : ";
+			cin >> ticketNum;
+
+			if (ticketNum >= 0 && ticketNum < tickets.size())
+			{
+				auto iter = tickets.begin();
+				for (int i = 0; i < ticketNum; i++)
+				{
+					iter++;
+				}
+
+				cout << "\n";
+				cout << "Ticket을 출력합니다... \n";
+
+				(*iter).PrintTicket();
+
+				cout << "\n";
+				cout << "Ticket 출력완료 ! \n";
+			}
+			else
+			{
+				cout << "\n";
+				cout << "Ticket 번호를 잘못입력하셨습니다. \n";
+				cout << "메뉴로 돌아갑니다. \n";
+			}
+			
+		}
+
 
 	}
 
+
+}
+
+void Application::ShowAllRoom()
+{
+	cout << "\n";
+	cout << "현재 상영관 리스트 \n";
+	for (auto room : m_roomList)
+	{
+		//cout << room.GetName() << "관 ";
+		room.Print();
+	}
+
+}
+
+void Application::ShowAllMovies()
+{
+	cout << "\n";
+	cout << "현재 영화 리스트 (" << m_movieList.size() << "개)" << "\n";
+	for (auto movie : m_movieList)
+	{
+		cout << movie.GetTitle() << "   " << movie.GetPrice() << "\n";
+	}
+}
+
+void Application::InsertRoom()
+{
+	int row;
+	int col;
+	string roomName;
+
+	cout << "\n";
+	cout << "--------- Insert Room ----------\n";
+
+	ShowAllRoom();
+
+	cout << "\n";
+	cout << "room size (row / col) : ";
+	cin >> row >> col;
+	cout << "room name : ";
+	cin >> roomName;
+
+	Room room;
+	room.Initialize(row, col, roomName);
+	m_roomList.push_back(room);
+
+	ShowAllRoom();
+
+}
+
+void Application::RemoveRoom()
+{
+	cout << "\n";
+	cout << "--------- Remove Room ----------\n";
+
+	ShowAllRoom();
+
+	string roomName;
+	cout << "\n";
+	cout << "remove room name : ";
+	cin >> roomName;
+
+	for (auto iter = m_roomList.begin(); iter != m_roomList.end(); iter++)
+	{
+		if ((*iter).GetName() == roomName)
+		{
+			m_roomList.erase(iter);
+			break;
+		}
+
+	}
+
+	ShowAllRoom();
+
+}
+
+void Application::InsertMovie()
+{
+	string title;
+	string releasedDate;
+	int runningTime;
+	int price;
+
+	cout << "\n";
+	cout << "--------- Insert Movie ----------\n";
+
+	ShowAllMovies();
+
+	cout << "title : ";
+	cin >> title;
+	cout << "releasedDate : ";
+	cin >> releasedDate;
+	cout << "runningTime : ";
+	cin >> runningTime;
+	cout << "price : ";
+	cin >> price;
+
+	Movie movie;
+	if (movie.Initialize(title, releasedDate, runningTime, price))
+	{
+		cout << "\n";
+		cout << "리스트에 영화를 추가합니다. \n";
+
+		m_movieList.push_back(movie);
+	}
+
+	ShowAllMovies();
+
+}
+
+void Application::ModifyMovie()
+{
+	cout << "\n";
+	cout << "--------- Modify Movie ----------\n";
+
+	ShowAllMovies();
+
+	int movieNum;
+	cout << "select movie num : ";
+	cin >> movieNum;
+
+	if (movieNum < 0 || movieNum >= m_movieList.size())
+	{
+		cout << "fail... \n";
+		return;
+	}
+
+	int index = 0;
+	for (auto iter = m_movieList.begin(); iter != m_movieList.end(); iter++)
+	{
+		if (movieNum == index)
+		{
+			int price = 0;
+			cout << "enter the price : ";
+			cin >> price;
+			(*iter).SetPrice(price);
+			break;
+		}
+
+		index++;
+	}
+
+	ShowAllMovies();
+
+}
+
+void Application::RemoveMovie()
+{
+	cout << "\n";
+	cout << "--------- Remove Movie ----------\n";
+
+	ShowAllMovies();
+
+	int movieNum;
+	cout << "select movie num : ";
+	cin >> movieNum;
+
+	if (movieNum < 0 || movieNum >= m_movieList.size())
+	{
+		cout << "fail... \n";
+		return;
+	}
+
+	int index = 0;
+	for (auto iter = m_movieList.begin(); iter != m_movieList.end(); iter++)
+	{
+		if (movieNum == index)
+		{
+			m_movieList.erase(iter);
+			break;
+		}
+
+		index++;
+	}
+
+	ShowAllMovies();
 
 }
 

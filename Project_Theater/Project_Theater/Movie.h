@@ -18,6 +18,7 @@ public:
 	const string& GetReleasedDate() { return m_releasedDate; }
 	int GetRunningTime() { return m_runningTime; }
 	int GetPrice() { return m_price; }
+	void SetPrice(int price) { m_price = price; }
 
 	static int GetCount() { return m_count; };
 

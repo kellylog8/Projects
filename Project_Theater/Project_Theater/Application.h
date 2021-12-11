@@ -25,9 +25,18 @@ private:
 		LOGIN,
 		LOGOUT,
 		RESERVE,
-		CANCLE,
+		//CANCLE,
 		CHECK,
 		EXIT,
+
+		ROOM_INSERT,
+		ROOM_REMOVE,
+		MOVIE_INSERT,
+		MOVIE_MODIFY,
+		MOVIE_REMOVE,
+		SCHEDULE_INSERT,
+		SCHEDULE_MODIFY,
+		SCHEDULE_REMOVE,
 	};
 
 	MENU SelectMenu();
@@ -36,6 +45,15 @@ private:
 	void Logout();
 	void Reserve();
 	void Check();
+
+	void ShowAllRoom();
+	void ShowAllMovies();
+
+	void InsertRoom();
+	void RemoveRoom();
+	void InsertMovie();
+	void ModifyMovie();
+	void RemoveMovie();
 
 private:
 	vector<Room> m_roomList;
@@ -46,6 +64,7 @@ private:
 
 	Member* m_member;	// login member
 	bool m_isLogin;
+	bool m_isAdmin;
 
 
 };

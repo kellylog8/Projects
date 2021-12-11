@@ -49,3 +49,31 @@ void Ticket::ShowTicket()
 	cout << "└──────────────────────────────────┘\n";
 
 }
+
+void Ticket::PrintTicket()
+{
+	ofstream fout;
+	fout.open("ticket.txt");
+
+	if (!fout.is_open())
+	{
+		cout << "File open failed... \n";
+		return;
+	}
+
+	fout << "\n";
+	fout << "[ Ticket ] \n";
+	fout << "\n";
+	fout << m_title << "\n";
+	fout << m_room << "관 " << m_seat << "\n";
+	fout << m_time << " (" << m_runningTime << "분)" << "\n";
+	fout << m_price << "원 (총 1명)" << "\n";
+	fout << "\n";
+	fout << "-------------------------------------" << "\n";
+	fout << "영화시작 10분전까지 입장해주세요." << "\n";
+	fout << "\n";
+
+	fout.close();
+
+
+}
